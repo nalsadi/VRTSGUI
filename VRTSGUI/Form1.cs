@@ -101,5 +101,17 @@ namespace VRTSGUI
         {
 
         }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddTrial_Click(object sender, EventArgs e)
+        {
+            Form trialForm = new Form2();
+            this.Hide();
+            trialForm.Show();
+        }
     }
 }
