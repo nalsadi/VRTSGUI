@@ -57,11 +57,115 @@ namespace VRTSGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\User\Source\Repos\nalsadi\VRTSGUI\VRTSGUI\Database.mdf;Integrated Security=True;Connect Timeout=30");
-            con.Open();
-            cmd = new SqlCommand("Insert Info");
+            SQLfx Data = new SQLfx();
+            
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES (@CarListSpaceRight)";
+            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
+            cmd.ExecuteNonQuery();
+            //Data.closeSQLConnection(con);
+            textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+            textBox1.Text = "";
         }
 
-    
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+           
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "DELETE FROM CarListSpaceRight WHERE ID=(SELECT MAX(Id) FROM CarListSpaceRight)";
+            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
+            cmd.ExecuteNonQuery();
+            //Data.closeSQLConnection(con);
+            textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox5.Show();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox5.Hide();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES (@CarListSpaceLeft)";
+            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@CarListSpaceLeft", textBox6.Text);
+            cmd.ExecuteNonQuery();
+            //Data.closeSQLConnection(con);
+            textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
+            textBox6.Text = "";
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "DELETE FROM CarListSpaceLeft WHERE ID=(SELECT MAX(Id) FROM CarListSpaceLeft)";
+            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //cmd.Parameters.AddWithValue("@CarListSpaceLeft", textBox1.Text);
+            cmd.ExecuteNonQuery();
+            //Data.closeSQLConnection(con);
+            textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
+            textBox6.Text = "";
+        }
+
     }
 }
