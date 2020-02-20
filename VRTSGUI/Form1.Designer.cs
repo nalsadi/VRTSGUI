@@ -259,7 +259,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(228, 21);
+            this.textBox4.Location = new System.Drawing.Point(228, 18);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(69, 22);
             this.textBox4.TabIndex = 3;
@@ -271,6 +271,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(69, 22);
             this.textBox5.TabIndex = 2;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // textBox6
             // 
@@ -278,6 +279,7 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(69, 22);
             this.textBox6.TabIndex = 1;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // dataGridView1
             // 

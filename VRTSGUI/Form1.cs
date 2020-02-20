@@ -104,7 +104,7 @@ namespace VRTSGUI
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnAddTrial_Click(object sender, EventArgs e)
@@ -112,6 +112,39 @@ namespace VRTSGUI
             Form trialForm = new Form2();
             this.Hide();
             trialForm.Show();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+        
+            int feet;
+            try
+            {
+                feet = int.Parse(textBox6.Text);
+            }
+            catch (Exception eq)
+            {
+                feet = 0;
+            }
+
+            int inches = 0;
+            int totalInches;
+            try
+            {
+                inches = int.Parse(textBox4.Text);
+                totalInches = feet * 12 + inches;
+            }
+            catch (Exception eq)
+            {
+                totalInches = feet * 12;
+            }
+           
+            textBox5.Text = System.Convert.ToString(totalInches/ 3.281);
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

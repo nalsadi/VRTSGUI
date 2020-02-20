@@ -74,7 +74,22 @@ namespace VRTSGUI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            bool Flag = false;
+            int i = 0;
+            foreach (char c in textBox1.Text)
+            {
+                if (c < '0' || c > '9' || i>3)
+                {
+                    Flag = true;
+                    break;
+                }
+                i++;
+            }
+            if(Flag == true)
+            {
+                textBox1.Text = textBox1.Text.Substring(0, i);
+                textBox1.SelectionStart = i;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -130,7 +145,22 @@ namespace VRTSGUI
 
         private void textBox6_TextChanged_1(object sender, EventArgs e)
         {
-
+            bool Flag = false;
+            int i = 0;
+            foreach (char c in textBox6.Text)
+            {
+                if (c < '0' || c > '9' || i > 3)
+                {
+                    Flag = true;
+                    break;
+                }
+                i++;
+            }
+            if (Flag == true)
+            {
+                textBox6.Text = textBox6.Text.Substring(0, i);
+                textBox6.SelectionStart = i;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
