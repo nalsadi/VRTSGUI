@@ -17,7 +17,7 @@ namespace VRTSGUI
         [STAThread]
         static void Main()
         {
-            /////////Clear CarSpaceList's on Start Up
+            /////////Clear Databases on Start Up -- Can Remove This To Keep Data
             SQLfx Data = new SQLfx();
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             String query = "DELETE FROM dbo.CarListSpaceRight";
@@ -26,14 +26,16 @@ namespace VRTSGUI
             query = "DELETE FROM dbo.CarListSpaceLeft";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
+            query = "DELETE FROM dbo.properties";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
             ///////
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-
-
+            
         }
 
     }
@@ -85,7 +87,7 @@ namespace VRTSGUI
                 con.Close();
 
             }
-            Console.WriteLine(Table.Rows.Count);
+            //Console.WriteLine(Table.Rows.Count);
             foreach (DataRow dataRow in Table.Rows)
             {
                 foreach (var item in dataRow.ItemArray)

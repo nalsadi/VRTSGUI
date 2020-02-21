@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -84,7 +85,7 @@ namespace VRTSGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            textBox2.Text = textBox5.Text;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -104,7 +105,31 @@ namespace VRTSGUI
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            
+            double feet;
+            double meters = 0;
+            try
+            {
+                feet = double.Parse(textBox6.Text);
+                meters = feet / 3.2808 + meters;
+            }
+            catch (Exception eq)
+            {
+                feet = 0;
+                meters = 0;
+            }
+
+            double inches = 0;
+            try
+            {
+                inches = double.Parse(textBox4.Text);
+                meters = meters + ((inches / 12) / 3.2808);
+            }
+            catch (Exception eq)
+            {
+                meters = meters; //Dont do anything 
+            }
+
+            textBox5.Text = System.Convert.ToString(meters);
         }
 
         private void btnAddTrial_Click(object sender, EventArgs e)
@@ -116,35 +141,100 @@ namespace VRTSGUI
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-        
-            int feet;
+
+            double feet;
+            double meters = 0;
             try
             {
-                feet = int.Parse(textBox6.Text);
+                feet = double.Parse(textBox6.Text);
+                meters = feet / 3.2808 + meters;
             }
             catch (Exception eq)
             {
                 feet = 0;
+                meters = 0;
             }
 
-            int inches = 0;
-            int totalInches;
+            double inches = 0;
             try
             {
-                inches = int.Parse(textBox4.Text);
-                totalInches = feet * 12 + inches;
+                inches = double.Parse(textBox4.Text);
+                meters = meters + ((inches/12)/3.2808);
             }
             catch (Exception eq)
             {
-                totalInches = feet * 12;
+                meters = meters; //Dont do anything 
             }
-           
-            textBox5.Text = System.Convert.ToString(totalInches/ 3.281);
+            meters = Math.Round(meters, 2);
+            textBox5.Text = System.Convert.ToString(meters);
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+            double ms, km = 0;
+            try
+            {
+                km = double.Parse(textBox10.Text);
+                ms = km / 3.6;
+            }
+            catch (Exception eq)
+            {
+                ms = 0;
+            }
+            ms = Math.Round(ms, 2);
+            textBox9.Text = System.Convert.ToString(ms);
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDataCollectionPeriod_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "INSERT INTO properties (DCP, NMD, RSD, RND, FCA, PCA, MPA) VALUES (@DCP, @NMD, @RSD, @RND, @FCA, @PCA, @MPA);";
+            cmd.Parameters.AddWithValue("@DCP", txtDataCollectionPeriod.Text);
+            cmd.Parameters.AddWithValue("@NMD", txtNearMissDistance.Text);
+            cmd.Parameters.AddWithValue("@RSD", txtRespawnStartDistance.Text);
+            cmd.Parameters.AddWithValue("@RND", txtRespawnEndDistance.Text);
+            cmd.Parameters.AddWithValue("@FCA", txtFullCheckAngle.Text);
+            cmd.Parameters.AddWithValue("@PCA", txtPartialCheckAngle.Text);
+            cmd.Parameters.AddWithValue("@MPA", txtMaxPitchAngle.Text);
+            cmd.ExecuteNonQuery();
+            //Data.closeSQLConnection(con);
+            //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+            //textBox1.Text = "";
+        }
+
+        private void txtNearMissDistance_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVisualTest_Click(object sender, EventArgs e)
+        {
+            toGlobal fileStuff = new toGlobal();
+            fileStuff.ee();
         }
     }
 }

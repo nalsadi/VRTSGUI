@@ -193,6 +193,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(69, 22);
             this.textBox2.TabIndex = 2;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox1
             // 
@@ -575,6 +576,7 @@
             this.txtNearMissDistance.Name = "txtNearMissDistance";
             this.txtNearMissDistance.Size = new System.Drawing.Size(48, 22);
             this.txtNearMissDistance.TabIndex = 3;
+            this.txtNearMissDistance.TextChanged += new System.EventHandler(this.txtNearMissDistance_TextChanged);
             // 
             // txtDataCollectionPeriod
             // 
@@ -583,6 +585,7 @@
             this.txtDataCollectionPeriod.Name = "txtDataCollectionPeriod";
             this.txtDataCollectionPeriod.Size = new System.Drawing.Size(48, 22);
             this.txtDataCollectionPeriod.TabIndex = 1;
+            this.txtDataCollectionPeriod.TextChanged += new System.EventHandler(this.txtDataCollectionPeriod_TextChanged);
             // 
             // lblDataCollectionPeriod
             // 
@@ -633,6 +636,7 @@
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(69, 22);
             this.textBox9.TabIndex = 2;
+            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
             // textBox10
             // 
@@ -640,6 +644,7 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(69, 22);
             this.textBox10.TabIndex = 1;
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
             // 
             // groupBox4
             // 
@@ -845,6 +850,7 @@
             this.btnVisualTest.TabIndex = 25;
             this.btnVisualTest.Text = "Visual Test";
             this.btnVisualTest.UseVisualStyleBackColor = true;
+            this.btnVisualTest.Click += new System.EventHandler(this.btnVisualTest_Click);
             // 
             // btnStart
             // 
@@ -856,6 +862,7 @@
             this.btnStart.TabIndex = 24;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // Form1
             // 
