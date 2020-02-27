@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Diagnostics;
 using System;
-
+using System.IO;
 
 namespace VRTSGUI
 {
@@ -62,16 +62,53 @@ namespace VRTSGUI
 
 
 
-            // DCP is Array 26
+            // DCP is Array 27
             strlist = array[26].Split(spearator, count, StringSplitOptions.None);
-            final = strlist[0] + " = " + DCP;
-            System.Console.WriteLine("\n\nHERE: {0} ", final);
+            array[26] = strlist[0] + " = " + DCP;
+
+            // NMD is Array 28
+            strlist = array[27].Split(spearator, count, StringSplitOptions.None);
+            array[27] = strlist[0] + " = " + NMD;
+
+            // RSD is Array 33
+            strlist = array[32].Split(spearator, count, StringSplitOptions.None);
+            array[32] = strlist[0] + " = " + RSD;
+
+            // RND is Array 34
+            strlist = array[33].Split(spearator, count, StringSplitOptions.None);
+            array[33] = strlist[0] + " = " + RND;
+
+            // FCA is Array 45
+            strlist = array[44].Split(spearator, count, StringSplitOptions.None);
+            array[44] = strlist[0] + " = " + FCA;
+           
+            // PCA is Array 46
+            strlist = array[45].Split(spearator, count, StringSplitOptions.None);
+            array[45] = strlist[0] + " = " + PCA;
+
+            // MPA is Array 48
+            strlist = array[47].Split(spearator, count, StringSplitOptions.None);
+            array[47] = strlist[0] + " = " + MPA;
+
 
 
 
             //  Once all values are in array, respective to their lines, then write array element by element to file line by line
+
+            // Write the string array to a new file named "WriteLines.txt".--- Will need to be chnaged to Globals.py
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine("WriteLines.txt")))
+            {
+                for (int i = 0; i < counter; i++)
+                {
+                    outputFile.WriteLine(array[i]);
+                }
+            }
             //  Now run the python scipt to start main simulation
+            
+
             //  Clean out database when all values have been put into file
+
+
         }
 
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.gbProgramConfiguration = new System.Windows.Forms.GroupBox();
             this.gbOptions = new System.Windows.Forms.GroupBox();
@@ -88,26 +88,29 @@
             this.btnRemovePreset = new System.Windows.Forms.Button();
             this.btnAddPreset = new System.Windows.Forms.Button();
             this.conditionLabel = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.rbXboxController = new System.Windows.Forms.RadioButton();
-            this.rbHeadset = new System.Windows.Forms.RadioButton();
-            this.rbMouse = new System.Windows.Forms.RadioButton();
-            this.chkRandomize = new System.Windows.Forms.CheckBox();
-            this.chkRandomizeCarOrder = new System.Windows.Forms.CheckBox();
             this.btnCopyTrial = new System.Windows.Forms.Button();
             this.btnEditTrial = new System.Windows.Forms.Button();
             this.btnRemoveTrial = new System.Windows.Forms.Button();
             this.btnAddTrial = new System.Windows.Forms.Button();
             this.btnVisualTest = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
+            this.databaseDataSet = new VRTSGUI.DatabaseDataSet();
+            this.databaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbProgramConfiguration.SuspendLayout();
             this.gbOptions.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -281,16 +284,6 @@
             this.textBox6.Size = new System.Drawing.Size(69, 22);
             this.textBox6.TabIndex = 1;
             this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 164);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(836, 469);
-            this.dataGridView1.TabIndex = 2;
             // 
             // label5
             // 
@@ -724,78 +717,6 @@
             this.conditionLabel.TabIndex = 18;
             this.conditionLabel.Text = "Condition:";
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.rbXboxController);
-            this.groupBox5.Controls.Add(this.rbHeadset);
-            this.groupBox5.Controls.Add(this.rbMouse);
-            this.groupBox5.Location = new System.Drawing.Point(886, 510);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Size = new System.Drawing.Size(291, 92);
-            this.groupBox5.TabIndex = 17;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Control";
-            // 
-            // rbXboxController
-            // 
-            this.rbXboxController.AutoSize = true;
-            this.rbXboxController.Location = new System.Drawing.Point(117, 31);
-            this.rbXboxController.Margin = new System.Windows.Forms.Padding(4);
-            this.rbXboxController.Name = "rbXboxController";
-            this.rbXboxController.Size = new System.Drawing.Size(125, 21);
-            this.rbXboxController.TabIndex = 2;
-            this.rbXboxController.TabStop = true;
-            this.rbXboxController.Text = "Xbox Controller";
-            this.rbXboxController.UseVisualStyleBackColor = true;
-            // 
-            // rbHeadset
-            // 
-            this.rbHeadset.AutoSize = true;
-            this.rbHeadset.Checked = true;
-            this.rbHeadset.Location = new System.Drawing.Point(21, 59);
-            this.rbHeadset.Margin = new System.Windows.Forms.Padding(4);
-            this.rbHeadset.Name = "rbHeadset";
-            this.rbHeadset.Size = new System.Drawing.Size(82, 21);
-            this.rbHeadset.TabIndex = 1;
-            this.rbHeadset.TabStop = true;
-            this.rbHeadset.Text = "Headset";
-            this.rbHeadset.UseVisualStyleBackColor = true;
-            // 
-            // rbMouse
-            // 
-            this.rbMouse.AutoSize = true;
-            this.rbMouse.Location = new System.Drawing.Point(21, 31);
-            this.rbMouse.Margin = new System.Windows.Forms.Padding(4);
-            this.rbMouse.Name = "rbMouse";
-            this.rbMouse.Size = new System.Drawing.Size(71, 21);
-            this.rbMouse.TabIndex = 0;
-            this.rbMouse.Text = "Mouse";
-            this.rbMouse.UseVisualStyleBackColor = true;
-            // 
-            // chkRandomize
-            // 
-            this.chkRandomize.AutoSize = true;
-            this.chkRandomize.Location = new System.Drawing.Point(649, 648);
-            this.chkRandomize.Margin = new System.Windows.Forms.Padding(4);
-            this.chkRandomize.Name = "chkRandomize";
-            this.chkRandomize.Size = new System.Drawing.Size(140, 21);
-            this.chkRandomize.TabIndex = 22;
-            this.chkRandomize.Text = "Randomize Trials";
-            this.chkRandomize.UseVisualStyleBackColor = true;
-            // 
-            // chkRandomizeCarOrder
-            // 
-            this.chkRandomizeCarOrder.AutoSize = true;
-            this.chkRandomizeCarOrder.Location = new System.Drawing.Point(649, 673);
-            this.chkRandomizeCarOrder.Margin = new System.Windows.Forms.Padding(4);
-            this.chkRandomizeCarOrder.Name = "chkRandomizeCarOrder";
-            this.chkRandomizeCarOrder.Size = new System.Drawing.Size(168, 21);
-            this.chkRandomizeCarOrder.TabIndex = 23;
-            this.chkRandomizeCarOrder.Text = "Randomize Car Order";
-            this.chkRandomizeCarOrder.UseVisualStyleBackColor = true;
-            // 
             // btnCopyTrial
             // 
             this.btnCopyTrial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -864,25 +785,85 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // databaseDataSet
+            // 
+            this.databaseDataSet.DataSetName = "DatabaseDataSet";
+            this.databaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // databaseDataSetBindingSource
+            // 
+            this.databaseDataSetBindingSource.DataSource = this.databaseDataSet;
+            this.databaseDataSetBindingSource.Position = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5});
+            this.dataGridView1.DataSource = this.databaseDataSetBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(17, 175);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(845, 435);
+            this.dataGridView1.TabIndex = 26;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Column2";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Column3";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 125;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Column4";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Column5";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 125;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1489, 758);
+            this.ClientSize = new System.Drawing.Size(1488, 758);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnVisualTest);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.chkRandomize);
-            this.Controls.Add(this.chkRandomizeCarOrder);
             this.Controls.Add(this.btnCopyTrial);
             this.Controls.Add(this.btnEditTrial);
             this.Controls.Add(this.btnRemoveTrial);
             this.Controls.Add(this.btnAddTrial);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.gbProgramConfiguration);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -893,7 +874,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gbProgramConfiguration.ResumeLayout(false);
             this.gbProgramConfiguration.PerformLayout();
             this.gbOptions.ResumeLayout(false);
@@ -902,8 +882,9 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -928,7 +909,6 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.GroupBox gbProgramConfiguration;
         internal System.Windows.Forms.GroupBox gbOptions;
@@ -970,18 +950,20 @@
         internal System.Windows.Forms.Button btnRemovePreset;
         internal System.Windows.Forms.Button btnAddPreset;
         internal System.Windows.Forms.Label conditionLabel;
-        internal System.Windows.Forms.GroupBox groupBox5;
-        internal System.Windows.Forms.RadioButton rbXboxController;
-        internal System.Windows.Forms.RadioButton rbHeadset;
-        internal System.Windows.Forms.RadioButton rbMouse;
-        internal System.Windows.Forms.CheckBox chkRandomize;
-        internal System.Windows.Forms.CheckBox chkRandomizeCarOrder;
         internal System.Windows.Forms.Button btnCopyTrial;
         internal System.Windows.Forms.Button btnEditTrial;
         internal System.Windows.Forms.Button btnRemoveTrial;
         internal System.Windows.Forms.Button btnAddTrial;
         internal System.Windows.Forms.Button btnVisualTest;
         internal System.Windows.Forms.Button btnStart;
+        private DatabaseDataSet databaseDataSet;
+        private System.Windows.Forms.BindingSource databaseDataSetBindingSource;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
     }
 }
 

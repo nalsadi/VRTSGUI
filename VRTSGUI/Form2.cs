@@ -184,7 +184,6 @@ namespace VRTSGUI
         private void button3_Click(object sender, EventArgs e)
         {
             SQLfx Data = new SQLfx();
-
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
 
             String query = "DELETE FROM CarListSpaceLeft WHERE ID=(SELECT MAX(Id) FROM CarListSpaceLeft)";
@@ -197,5 +196,34 @@ namespace VRTSGUI
             textBox6.Text = "";
         }
 
+        private void btnOk_Click_1(object sender, EventArgs e)
+        {
+            
+
+            SQLfx Data = new SQLfx();
+
+            Console.WriteLine("HELLO " + Data.printString("CarListSpaceLeft", "CarListSpaceLeft"));
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft);";
+            cmd.Parameters.AddWithValue("@trialType", cbTrialType.Text);
+            cmd.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
+            cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
+            cmd.Parameters.AddWithValue("@CarSpaceLeft", Data.printString("CarListSpaceLeft", "CarListSpaceLeft"));
+            cmd.ExecuteNonQuery();
+            this.Hide();
+        }
+
+        private void cbTrialType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbCarBehaviour_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

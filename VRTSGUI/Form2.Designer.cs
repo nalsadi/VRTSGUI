@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -52,21 +51,23 @@
             this.button4 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.trialPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.txtContinuousCarSpeed = new System.Windows.Forms.TextBox();
+            this.lblContinuousCarSpeed = new System.Windows.Forms.Label();
+            this.cbCarBehaviour = new System.Windows.Forms.ComboBox();
+            this.carBehaviourLabel = new System.Windows.Forms.Label();
+            this.trialTypeLabel = new System.Windows.Forms.Label();
+            this.cbTrialType = new System.Windows.Forms.ComboBox();
+            this.Panel1 = new System.Windows.Forms.Panel();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.trialPropertiesGroupBox.SuspendLayout();
+            this.Panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(2, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(509, 250);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Trial Properties";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox3
             // 
@@ -294,14 +295,146 @@
             this.label6.TabIndex = 2;
             this.label6.Text = "Space:";
             // 
+            // trialPropertiesGroupBox
+            // 
+            this.trialPropertiesGroupBox.Controls.Add(this.txtContinuousCarSpeed);
+            this.trialPropertiesGroupBox.Controls.Add(this.lblContinuousCarSpeed);
+            this.trialPropertiesGroupBox.Controls.Add(this.trialTypeLabel);
+            this.trialPropertiesGroupBox.Controls.Add(this.cbTrialType);
+            this.trialPropertiesGroupBox.Controls.Add(this.cbCarBehaviour);
+            this.trialPropertiesGroupBox.Controls.Add(this.carBehaviourLabel);
+            this.trialPropertiesGroupBox.Location = new System.Drawing.Point(13, 2);
+            this.trialPropertiesGroupBox.Margin = new System.Windows.Forms.Padding(4);
+            this.trialPropertiesGroupBox.Name = "trialPropertiesGroupBox";
+            this.trialPropertiesGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.trialPropertiesGroupBox.Size = new System.Drawing.Size(641, 261);
+            this.trialPropertiesGroupBox.TabIndex = 11;
+            this.trialPropertiesGroupBox.TabStop = false;
+            this.trialPropertiesGroupBox.Text = "Trial Properties";
+            // 
+            // txtContinuousCarSpeed
+            // 
+            this.txtContinuousCarSpeed.Location = new System.Drawing.Point(266, 159);
+            this.txtContinuousCarSpeed.Margin = new System.Windows.Forms.Padding(4);
+            this.txtContinuousCarSpeed.Name = "txtContinuousCarSpeed";
+            this.txtContinuousCarSpeed.Size = new System.Drawing.Size(81, 22);
+            this.txtContinuousCarSpeed.TabIndex = 2;
+            // 
+            // lblContinuousCarSpeed
+            // 
+            this.lblContinuousCarSpeed.Location = new System.Drawing.Point(137, 162);
+            this.lblContinuousCarSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContinuousCarSpeed.Name = "lblContinuousCarSpeed";
+            this.lblContinuousCarSpeed.Size = new System.Drawing.Size(155, 16);
+            this.lblContinuousCarSpeed.TabIndex = 42;
+            this.lblContinuousCarSpeed.Text = "Car Speed (km/h):";
+            // 
+            // cbCarBehaviour
+            // 
+            this.cbCarBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCarBehaviour.FormattingEnabled = true;
+            this.cbCarBehaviour.Items.AddRange(new object[] {
+            "Spawn On Enter Road",
+            "Spawn On Start Trial"});
+            this.cbCarBehaviour.Location = new System.Drawing.Point(266, 109);
+            this.cbCarBehaviour.Margin = new System.Windows.Forms.Padding(4);
+            this.cbCarBehaviour.Name = "cbCarBehaviour";
+            this.cbCarBehaviour.Size = new System.Drawing.Size(196, 24);
+            this.cbCarBehaviour.TabIndex = 1;
+            this.cbCarBehaviour.SelectedIndexChanged += new System.EventHandler(this.cbCarBehaviour_SelectedIndexChanged);
+            // 
+            // carBehaviourLabel
+            // 
+            this.carBehaviourLabel.AutoSize = true;
+            this.carBehaviourLabel.Location = new System.Drawing.Point(153, 112);
+            this.carBehaviourLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.carBehaviourLabel.Name = "carBehaviourLabel";
+            this.carBehaviourLabel.Size = new System.Drawing.Size(102, 17);
+            this.carBehaviourLabel.TabIndex = 0;
+            this.carBehaviourLabel.Text = "Car Behaviour:";
+            // 
+            // trialTypeLabel
+            // 
+            this.trialTypeLabel.AutoSize = true;
+            this.trialTypeLabel.Location = new System.Drawing.Point(211, 68);
+            this.trialTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.trialTypeLabel.Name = "trialTypeLabel";
+            this.trialTypeLabel.Size = new System.Drawing.Size(44, 17);
+            this.trialTypeLabel.TabIndex = 3;
+            this.trialTypeLabel.Text = "Type:";
+            // 
+            // cbTrialType
+            // 
+            this.cbTrialType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTrialType.FormattingEnabled = true;
+            this.cbTrialType.Items.AddRange(new object[] {
+            "Evasive",
+            "Pilot",
+            "Practice",
+            "SpeedTest_Walking",
+            "SpeedTest_Running",
+            "TimePressureOn-Pre",
+            "TimePressureOn-Post",
+            "Standard-ConstantGap-Pre",
+            "Standard-ConstantGap-Post",
+            "Standard-Familiarity-Pre",
+            "Standard-Familiarity-Post",
+            "Standard-VariableGap-Pre",
+            "Standard-VariableGap-Post",
+            "Standard-IncrementalGap-Pre",
+            "Standard-IncrementalGap-Post"});
+            this.cbTrialType.Location = new System.Drawing.Point(266, 65);
+            this.cbTrialType.Margin = new System.Windows.Forms.Padding(4);
+            this.cbTrialType.Name = "cbTrialType";
+            this.cbTrialType.Size = new System.Drawing.Size(196, 24);
+            this.cbTrialType.TabIndex = 0;
+            this.cbTrialType.SelectedIndexChanged += new System.EventHandler(this.cbTrialType_SelectedIndexChanged);
+            // 
+            // Panel1
+            // 
+            this.Panel1.Controls.Add(this.btnOk);
+            this.Panel1.Controls.Add(this.btnCancel);
+            this.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Panel1.Location = new System.Drawing.Point(0, 642);
+            this.Panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.Panel1.Name = "Panel1";
+            this.Panel1.Size = new System.Drawing.Size(1258, 43);
+            this.Panel1.TabIndex = 12;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Location = new System.Drawing.Point(1022, 5);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(100, 28);
+            this.btnOk.TabIndex = 9;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click_1);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(1130, 5);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.TabIndex = 10;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1195, 728);
+            this.ClientSize = new System.Drawing.Size(1258, 685);
+            this.Controls.Add(this.Panel1);
+            this.Controls.Add(this.trialPropertiesGroupBox);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "Edit Trial";
@@ -313,13 +446,14 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.trialPropertiesGroupBox.ResumeLayout(false);
+            this.trialPropertiesGroupBox.PerformLayout();
+            this.Panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
@@ -342,5 +476,15 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.GroupBox trialPropertiesGroupBox;
+        internal System.Windows.Forms.TextBox txtContinuousCarSpeed;
+        internal System.Windows.Forms.Label lblContinuousCarSpeed;
+        internal System.Windows.Forms.ComboBox cbCarBehaviour;
+        internal System.Windows.Forms.Label carBehaviourLabel;
+        internal System.Windows.Forms.Label trialTypeLabel;
+        internal System.Windows.Forms.ComboBox cbTrialType;
+        internal System.Windows.Forms.Panel Panel1;
+        internal System.Windows.Forms.Button btnOk;
+        internal System.Windows.Forms.Button btnCancel;
     }
 }

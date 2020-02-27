@@ -135,7 +135,7 @@ namespace VRTSGUI
         private void btnAddTrial_Click(object sender, EventArgs e)
         {
             Form trialForm = new Form2();
-            this.Hide();
+            //this.Hide();
             trialForm.Show();
         }
 
@@ -235,6 +235,11 @@ namespace VRTSGUI
         {
             toGlobal fileStuff = new toGlobal();
             fileStuff.ee();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

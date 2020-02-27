@@ -29,6 +29,9 @@ namespace VRTSGUI
             query = "DELETE FROM dbo.properties";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
+            query = "DELETE FROM dbo.trialProperties";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
             ///////
 
             Application.EnableVisualStyles();
