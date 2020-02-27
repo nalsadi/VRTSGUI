@@ -73,6 +73,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseDataSet1.cs">
+      <DependentUpon>DatabaseDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

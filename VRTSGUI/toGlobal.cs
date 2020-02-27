@@ -104,7 +104,7 @@ namespace VRTSGUI
                 }
             }
             //  Now run the python scipt to start main simulation
-            
+
 
             //  Clean out database when all values have been put into file
 

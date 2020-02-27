@@ -235,9 +235,27 @@ namespace VRTSGUI
         {
             toGlobal fileStuff = new toGlobal();
             fileStuff.ee();
+
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            SqlCommand cmd = new SqlCommand();
+           // cmd.Connection = con;
+
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM trialList",con);
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+
+            dataGridView1.DataSource = dtbl;
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

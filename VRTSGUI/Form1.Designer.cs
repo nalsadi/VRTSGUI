@@ -88,20 +88,15 @@
             this.btnRemovePreset = new System.Windows.Forms.Button();
             this.btnAddPreset = new System.Windows.Forms.Button();
             this.conditionLabel = new System.Windows.Forms.Label();
-            this.btnCopyTrial = new System.Windows.Forms.Button();
             this.btnEditTrial = new System.Windows.Forms.Button();
             this.btnRemoveTrial = new System.Windows.Forms.Button();
             this.btnAddTrial = new System.Windows.Forms.Button();
-            this.btnVisualTest = new System.Windows.Forms.Button();
-            this.btnStart = new System.Windows.Forms.Button();
             this.databaseDataSet = new VRTSGUI.DatabaseDataSet();
             this.databaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnCopyTrial = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnVisualTest = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbProgramConfiguration.SuspendLayout();
@@ -717,17 +712,6 @@
             this.conditionLabel.TabIndex = 18;
             this.conditionLabel.Text = "Condition:";
             // 
-            // btnCopyTrial
-            // 
-            this.btnCopyTrial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCopyTrial.Location = new System.Drawing.Point(132, 659);
-            this.btnCopyTrial.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCopyTrial.Name = "btnCopyTrial";
-            this.btnCopyTrial.Size = new System.Drawing.Size(100, 28);
-            this.btnCopyTrial.TabIndex = 21;
-            this.btnCopyTrial.Text = "Copy Trial";
-            this.btnCopyTrial.UseVisualStyleBackColor = true;
-            // 
             // btnEditTrial
             // 
             this.btnEditTrial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -762,16 +746,26 @@
             this.btnAddTrial.UseVisualStyleBackColor = true;
             this.btnAddTrial.Click += new System.EventHandler(this.btnAddTrial_Click);
             // 
-            // btnVisualTest
+            // databaseDataSet
             // 
-            this.btnVisualTest.Location = new System.Drawing.Point(911, 655);
-            this.btnVisualTest.Margin = new System.Windows.Forms.Padding(4);
-            this.btnVisualTest.Name = "btnVisualTest";
-            this.btnVisualTest.Size = new System.Drawing.Size(100, 41);
-            this.btnVisualTest.TabIndex = 25;
-            this.btnVisualTest.Text = "Visual Test";
-            this.btnVisualTest.UseVisualStyleBackColor = true;
-            this.btnVisualTest.Click += new System.EventHandler(this.btnVisualTest_Click);
+            this.databaseDataSet.DataSetName = "DatabaseDataSet";
+            this.databaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // databaseDataSetBindingSource
+            // 
+            this.databaseDataSetBindingSource.DataSource = this.databaseDataSet;
+            this.databaseDataSetBindingSource.Position = 0;
+            // 
+            // btnCopyTrial
+            // 
+            this.btnCopyTrial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCopyTrial.Location = new System.Drawing.Point(132, 659);
+            this.btnCopyTrial.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCopyTrial.Name = "btnCopyTrial";
+            this.btnCopyTrial.Size = new System.Drawing.Size(100, 28);
+            this.btnCopyTrial.TabIndex = 21;
+            this.btnCopyTrial.Text = "Copy Trial";
+            this.btnCopyTrial.UseVisualStyleBackColor = true;
             // 
             // btnStart
             // 
@@ -785,68 +779,27 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // databaseDataSet
+            // btnVisualTest
             // 
-            this.databaseDataSet.DataSetName = "DatabaseDataSet";
-            this.databaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // databaseDataSetBindingSource
-            // 
-            this.databaseDataSetBindingSource.DataSource = this.databaseDataSet;
-            this.databaseDataSetBindingSource.Position = 0;
+            this.btnVisualTest.Location = new System.Drawing.Point(911, 655);
+            this.btnVisualTest.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVisualTest.Name = "btnVisualTest";
+            this.btnVisualTest.Size = new System.Drawing.Size(100, 41);
+            this.btnVisualTest.TabIndex = 25;
+            this.btnVisualTest.Text = "Visual Test";
+            this.btnVisualTest.UseVisualStyleBackColor = true;
+            this.btnVisualTest.Click += new System.EventHandler(this.btnVisualTest_Click);
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
-            this.dataGridView1.DataSource = this.databaseDataSetBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 175);
+            this.dataGridView1.Location = new System.Drawing.Point(17, 177);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(845, 435);
+            this.dataGridView1.Size = new System.Drawing.Size(837, 442);
             this.dataGridView1.TabIndex = 26;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 125;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Column5";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 125;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // Form1
             // 
@@ -950,20 +903,15 @@
         internal System.Windows.Forms.Button btnRemovePreset;
         internal System.Windows.Forms.Button btnAddPreset;
         internal System.Windows.Forms.Label conditionLabel;
-        internal System.Windows.Forms.Button btnCopyTrial;
         internal System.Windows.Forms.Button btnEditTrial;
         internal System.Windows.Forms.Button btnRemoveTrial;
         internal System.Windows.Forms.Button btnAddTrial;
-        internal System.Windows.Forms.Button btnVisualTest;
-        internal System.Windows.Forms.Button btnStart;
         private DatabaseDataSet databaseDataSet;
         private System.Windows.Forms.BindingSource databaseDataSetBindingSource;
+        internal System.Windows.Forms.Button btnCopyTrial;
+        internal System.Windows.Forms.Button btnStart;
+        internal System.Windows.Forms.Button btnVisualTest;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
     }
 }
 
