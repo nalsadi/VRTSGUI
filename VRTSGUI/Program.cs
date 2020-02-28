@@ -65,7 +65,7 @@ namespace VRTSGUI
                 SqlDataAdapter _dap = new SqlDataAdapter(_cmd);
                 _dap.Fill(Table);
                 con.Close();
-
+                //
             }
             Console.WriteLine(Table.Rows.Count);
             foreach (DataRow dataRow in Table.Rows)
