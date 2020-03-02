@@ -911,7 +911,7 @@
         internal System.Windows.Forms.Button btnCopyTrial;
         internal System.Windows.Forms.Button btnStart;
         internal System.Windows.Forms.Button btnVisualTest;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        public System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

@@ -16,6 +16,7 @@ namespace VRTSGUI
         public Form1()
         {
             InitializeComponent();
+            updateDataTable();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -134,9 +135,9 @@ namespace VRTSGUI
 
         private void btnAddTrial_Click(object sender, EventArgs e)
         {
-            Form trialForm = new Form2();
+            Form2 frm = new Form2(this);
             //this.Hide();
-            trialForm.Show();
+            frm.Show();
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
@@ -159,7 +160,7 @@ namespace VRTSGUI
             try
             {
                 inches = double.Parse(textBox4.Text);
-                meters = meters + ((inches/12)/3.2808);
+                meters = meters + ((inches / 12) / 3.2808);
             }
             catch (Exception eq)
             {
@@ -231,7 +232,7 @@ namespace VRTSGUI
 
         }
 
-        private void btnVisualTest_Click(object sender, EventArgs e)
+        public void btnVisualTest_Click(object sender, EventArgs e)
         {
             toGlobal fileStuff = new toGlobal();
             fileStuff.ee();
@@ -240,16 +241,29 @@ namespace VRTSGUI
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
-           // cmd.Connection = con;
 
-            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM trialList",con);
+            // cmd.Connection = con;
+
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM trialList", con);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
 
             dataGridView1.DataSource = dtbl;
 
         }
+        public void updateDataTable(){
+            SQLfx Data = new SQLfx();
 
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            SqlCommand cmd = new SqlCommand();
+
+            // cmd.Connection = con;
+
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM trialList", con);
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+            dataGridView1.DataSource = dtbl;
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -259,5 +273,6 @@ namespace VRTSGUI
         {
 
         }
+
     }
 }

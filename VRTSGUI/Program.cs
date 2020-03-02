@@ -32,6 +32,9 @@ namespace VRTSGUI
             query = "DELETE FROM dbo.trialProperties";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
+            query = "DELETE FROM dbo.trialList";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
             ///////
 
             Application.EnableVisualStyles();

@@ -10,13 +10,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VRTSGUI
-{
+{ 
+
     public partial class Form2 : Form
     {
-        public Form2()
+        private readonly Form1 frm1; //readonly is optional (For safety purposes)
+
+        public Form2(Form1 frm)
         {
             InitializeComponent();
-        }
+            frm1 = frm;
+    }
 
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -213,7 +217,14 @@ namespace VRTSGUI
             cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
             cmd.Parameters.AddWithValue("@CarSpaceLeft", Data.printString("CarListSpaceLeft", "CarListSpaceLeft"));
             cmd.ExecuteNonQuery();
-            this.Hide();
+
+
+            frm1.updateDataTable();
+            this.Close();
+            // cmd.Connection = con;
+            //this.Hide();
+
+           
         }
 
         private void cbTrialType_SelectedIndexChanged(object sender, EventArgs e)
