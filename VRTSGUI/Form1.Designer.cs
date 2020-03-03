@@ -95,7 +95,6 @@
             this.databaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnCopyTrial = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.btnVisualTest = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -733,6 +732,7 @@
             this.btnRemoveTrial.TabIndex = 19;
             this.btnRemoveTrial.Text = "Remove Trial...";
             this.btnRemoveTrial.UseVisualStyleBackColor = true;
+            this.btnRemoveTrial.Click += new System.EventHandler(this.btnRemoveTrial_Click);
             // 
             // btnAddTrial
             // 
@@ -766,6 +766,7 @@
             this.btnCopyTrial.TabIndex = 21;
             this.btnCopyTrial.Text = "Copy Trial";
             this.btnCopyTrial.UseVisualStyleBackColor = true;
+            this.btnCopyTrial.Click += new System.EventHandler(this.btnCopyTrial_Click);
             // 
             // btnStart
             // 
@@ -779,22 +780,14 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // btnVisualTest
-            // 
-            this.btnVisualTest.Location = new System.Drawing.Point(911, 655);
-            this.btnVisualTest.Margin = new System.Windows.Forms.Padding(4);
-            this.btnVisualTest.Name = "btnVisualTest";
-            this.btnVisualTest.Size = new System.Drawing.Size(100, 41);
-            this.btnVisualTest.TabIndex = 25;
-            this.btnVisualTest.Text = "Visual Test";
-            this.btnVisualTest.UseVisualStyleBackColor = true;
-            this.btnVisualTest.Click += new System.EventHandler(this.btnVisualTest_Click);
-            // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(17, 177);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(837, 442);
@@ -807,7 +800,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1488, 758);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btnVisualTest);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnCopyTrial);
             this.Controls.Add(this.btnEditTrial);
@@ -910,7 +902,6 @@
         private System.Windows.Forms.BindingSource databaseDataSetBindingSource;
         internal System.Windows.Forms.Button btnCopyTrial;
         internal System.Windows.Forms.Button btnStart;
-        internal System.Windows.Forms.Button btnVisualTest;
         public System.Windows.Forms.DataGridView dataGridView1;
     }
 }

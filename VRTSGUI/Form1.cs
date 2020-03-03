@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 namespace VRTSGUI
 {
     public partial class Form1 : Form
@@ -259,10 +259,19 @@ namespace VRTSGUI
 
             // cmd.Connection = con;
 
-            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM trialList", con);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT trialType, trialBehav, CarSpaceRight, CarSpaceLeft FROM trialList", con);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             dataGridView1.DataSource = dtbl;
+            dataGridView1.Columns[0].HeaderText = "Trial Type";
+            dataGridView1.Columns[1].HeaderText = "Trial Behaviour";
+            dataGridView1.Columns[2].HeaderText = "Right Facing Car Space";
+            dataGridView1.Columns[3].HeaderText = "Left Facing Car Space";
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.ReadOnly = true;
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -274,5 +283,59 @@ namespace VRTSGUI
 
         }
 
+        private void btnRemoveTrial_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+           
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "DELETE FROM trialList WHERE ID=(SELECT MAX(Id) FROM trialList)";
+            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
+            cmd.ExecuteNonQuery();
+            updateDataTable();
+            //Data.closeSQLConnection(con);
+            //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+        }
+
+        private void btnCopyTrial_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM trialList ORDER BY ID DESC", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            StringBuilder output = new StringBuilder();
+            foreach (DataRow dr in dt.Rows)
+            { 
+                foreach (DataColumn col in dt.Columns)
+                {
+                    output.AppendFormat("{0},", dr[col]);
+                }
+
+                output.AppendLine();
+            }
+            Console.WriteLine(output);
+            String[] strlist = new String[5];
+            Int32 count = 5;
+            char[] spearator = { ',' };
+            string newoutput = output.ToString();
+
+            // DCP is Array 27
+            strlist = newoutput.Split(spearator, count, StringSplitOptions.None);
+            Console.WriteLine(strlist[2]);
+
+            cmd.Connection = con;
+            cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft);";
+            cmd.Parameters.AddWithValue("@trialType", strlist[1]);
+            cmd.Parameters.AddWithValue("@trialBehav", strlist[2]);
+            cmd.Parameters.AddWithValue("@CarSpaceRight", strlist[3]);
+            cmd.Parameters.AddWithValue("@CarSpaceLeft", strlist[4]);
+
+
+        }
     }
 }

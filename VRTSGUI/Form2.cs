@@ -218,13 +218,19 @@ namespace VRTSGUI
             cmd.Parameters.AddWithValue("@CarSpaceLeft", Data.printString("CarListSpaceLeft", "CarListSpaceLeft"));
             cmd.ExecuteNonQuery();
 
-
             frm1.updateDataTable();
             this.Close();
+
+            String query = "DELETE FROM dbo.CarListSpaceRight";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            query = "DELETE FROM dbo.CarListSpaceLeft";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
             // cmd.Connection = con;
             //this.Hide();
 
-           
+
         }
 
         private void cbTrialType_SelectedIndexChanged(object sender, EventArgs e)
@@ -235,6 +241,11 @@ namespace VRTSGUI
         private void cbCarBehaviour_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
