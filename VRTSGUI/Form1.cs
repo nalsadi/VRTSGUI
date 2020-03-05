@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
+
 namespace VRTSGUI
 {
     public partial class Form1 : Form
@@ -301,6 +303,7 @@ namespace VRTSGUI
 
         private void btnCopyTrial_Click(object sender, EventArgs e)
         {
+           // Needs defensive programming -- What if no entires in DataTable??
             SQLfx Data = new SQLfx();
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
@@ -321,19 +324,27 @@ namespace VRTSGUI
             Console.WriteLine(output);
             String[] strlist = new String[5];
             Int32 count = 5;
-            char[] spearator = { ',' };
+            char[] spearator = { ',', '\0', '\n'};
             string newoutput = output.ToString();
 
             // DCP is Array 27
             strlist = newoutput.Split(spearator, count, StringSplitOptions.None);
             Console.WriteLine(strlist[2]);
+            String TrialType = strlist[1];
+            String TrialBehav = strlist[2];
+            String CSR = strlist[3];
+            String CSL = strlist[4];
 
+            String replace = Regex.Replace(CSL, @"\t|\n|\r|,", "");
+            //CSL[CSL.Length -1] = "/0";
             cmd.Connection = con;
             cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft);";
-            cmd.Parameters.AddWithValue("@trialType", strlist[1]);
-            cmd.Parameters.AddWithValue("@trialBehav", strlist[2]);
-            cmd.Parameters.AddWithValue("@CarSpaceRight", strlist[3]);
-            cmd.Parameters.AddWithValue("@CarSpaceLeft", strlist[4]);
+            cmd.Parameters.AddWithValue("@trialType", TrialType);
+            cmd.Parameters.AddWithValue("@trialBehav", TrialBehav);
+            cmd.Parameters.AddWithValue("@CarSpaceRight",CSR);
+            cmd.Parameters.AddWithValue("@CarSpaceLeft", replace);
+            cmd.ExecuteNonQuery();
+            updateDataTable();
 
 
         }
