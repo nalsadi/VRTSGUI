@@ -61,6 +61,8 @@
             this.Panel1 = new System.Windows.Forms.Panel();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -148,7 +150,7 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(2, 258);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(659, 399);
+            this.groupBox2.Size = new System.Drawing.Size(912, 399);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Car Spaces";
@@ -208,6 +210,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.textBox7);
+            this.groupBox5.Controls.Add(this.label7);
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.textBox4);
             this.groupBox5.Controls.Add(this.label5);
@@ -218,7 +222,7 @@
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Location = new System.Drawing.Point(25, 484);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(613, 146);
+            this.groupBox5.Size = new System.Drawing.Size(820, 146);
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Left Facing Cars";
@@ -427,6 +431,26 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(727, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 17);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Offset";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(700, 73);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 22);
+            this.textBox7.TabIndex = 9;
+            this.textBox7.Text = "0";
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -487,5 +511,7 @@
         internal System.Windows.Forms.Panel Panel1;
         internal System.Windows.Forms.Button btnOk;
         internal System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }

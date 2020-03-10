@@ -40,8 +40,7 @@ namespace VRTSGUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            
+                        
         }
 
     }
@@ -98,8 +97,32 @@ namespace VRTSGUI
             {
                 foreach (var item in dataRow.ItemArray)
                 {
-                    Console.WriteLine(item);
+                    //Console.WriteLine(item);
                     columnToString += " " + item;
+                }
+            }
+            return columnToString;
+
+        }public String printCS(String tableName, String Column)
+        {
+            SqlConnection con = openSQLConnection();
+            String str = "select " + Column + " from "+ tableName;
+            String columnToString = "";
+            DataTable Table = new DataTable("TestTable");
+            using (SqlCommand _cmd = new SqlCommand(str, con))
+            {
+                SqlDataAdapter _dap = new SqlDataAdapter(_cmd);
+                _dap.Fill(Table);
+                con.Close();
+
+            }
+            //Console.WriteLine(Table.Rows.Count);
+            foreach (DataRow dataRow in Table.Rows)
+            {
+                foreach (var item in dataRow.ItemArray)
+                {
+                    //Console.WriteLine(item);
+                    columnToString += ":" + item;
                 }
             }
             return columnToString;

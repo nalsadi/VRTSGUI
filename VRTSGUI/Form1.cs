@@ -227,6 +227,8 @@ namespace VRTSGUI
             //Data.closeSQLConnection(con);
             //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             //textBox1.Text = "";
+            toGlobal fileStuff = new toGlobal();
+            fileStuff.ee();
         }
 
         private void txtNearMissDistance_TextChanged(object sender, EventArgs e)

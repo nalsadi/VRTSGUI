@@ -202,12 +202,31 @@ namespace VRTSGUI
 
         private void btnOk_Click_1(object sender, EventArgs e)
         {
-            
-
             SQLfx Data = new SQLfx();
+            String farLaneSpace = Data.printString("CarListSpaceLeft", "CarListSpaceLeft") ;
+            String closeLaneSpace = Data.printString("CarListSpaceRight", "CarListSpaceRight");
 
-            Console.WriteLine("HELLO " + Data.printString("CarListSpaceLeft", "CarListSpaceLeft"));
+            Int32 count = 210;
+            String final = "";
+            String[] strlist = new String[210];
+            String[] strlist1 = new String[210];
+            char[] spearator = { ' ' };
 
+            
+            // DCP is Array 27
+            strlist = farLaneSpace.Split(spearator, count, StringSplitOptions.None);
+            strlist1 = closeLaneSpace.Split(spearator, count, StringSplitOptions.None);
+            if (Math.Abs(int.Parse(strlist[1]) - int.Parse(strlist1[1])) != int.Parse(textBox7.Text)){
+                strlist1[1] = (int.Parse(strlist1[1]) + int.Parse(textBox7.Text)).ToString();
+            }
+
+
+            Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
+            Console.WriteLine(string.Join(" ", strlist1));
+            for (int i =0; i < strlist1.Length; i++)
+            {
+                Console.WriteLine(i + " : " + strlist1[i] + "\n");
+            }
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
@@ -215,7 +234,7 @@ namespace VRTSGUI
             cmd.Parameters.AddWithValue("@trialType", cbTrialType.Text);
             cmd.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
             cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
-            cmd.Parameters.AddWithValue("@CarSpaceLeft", Data.printString("CarListSpaceLeft", "CarListSpaceLeft"));
+            cmd.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist1));
             cmd.ExecuteNonQuery();
 
             frm1.updateDataTable();
@@ -246,6 +265,16 @@ namespace VRTSGUI
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
