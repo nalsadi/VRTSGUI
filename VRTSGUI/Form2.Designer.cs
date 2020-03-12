@@ -43,6 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,15 +56,13 @@
             this.trialPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.txtContinuousCarSpeed = new System.Windows.Forms.TextBox();
             this.lblContinuousCarSpeed = new System.Windows.Forms.Label();
-            this.cbCarBehaviour = new System.Windows.Forms.ComboBox();
-            this.carBehaviourLabel = new System.Windows.Forms.Label();
             this.trialTypeLabel = new System.Windows.Forms.Label();
             this.cbTrialType = new System.Windows.Forms.ComboBox();
+            this.cbCarBehaviour = new System.Windows.Forms.ComboBox();
+            this.carBehaviourLabel = new System.Windows.Forms.Label();
             this.Panel1 = new System.Windows.Forms.Panel();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -123,6 +123,7 @@
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 3;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // button1
             // 
@@ -226,6 +227,26 @@
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Left Facing Cars";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(700, 73);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 22);
+            this.textBox7.TabIndex = 9;
+            this.textBox7.Text = "0";
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(727, 53);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 17);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Offset";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label4
             // 
@@ -333,30 +354,6 @@
             this.lblContinuousCarSpeed.TabIndex = 42;
             this.lblContinuousCarSpeed.Text = "Car Speed (km/h):";
             // 
-            // cbCarBehaviour
-            // 
-            this.cbCarBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCarBehaviour.FormattingEnabled = true;
-            this.cbCarBehaviour.Items.AddRange(new object[] {
-            "Spawn On Enter Road",
-            "Spawn On Start Trial"});
-            this.cbCarBehaviour.Location = new System.Drawing.Point(266, 109);
-            this.cbCarBehaviour.Margin = new System.Windows.Forms.Padding(4);
-            this.cbCarBehaviour.Name = "cbCarBehaviour";
-            this.cbCarBehaviour.Size = new System.Drawing.Size(196, 24);
-            this.cbCarBehaviour.TabIndex = 1;
-            this.cbCarBehaviour.SelectedIndexChanged += new System.EventHandler(this.cbCarBehaviour_SelectedIndexChanged);
-            // 
-            // carBehaviourLabel
-            // 
-            this.carBehaviourLabel.AutoSize = true;
-            this.carBehaviourLabel.Location = new System.Drawing.Point(153, 112);
-            this.carBehaviourLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.carBehaviourLabel.Name = "carBehaviourLabel";
-            this.carBehaviourLabel.Size = new System.Drawing.Size(102, 17);
-            this.carBehaviourLabel.TabIndex = 0;
-            this.carBehaviourLabel.Text = "Car Behaviour:";
-            // 
             // trialTypeLabel
             // 
             this.trialTypeLabel.AutoSize = true;
@@ -394,6 +391,30 @@
             this.cbTrialType.TabIndex = 0;
             this.cbTrialType.SelectedIndexChanged += new System.EventHandler(this.cbTrialType_SelectedIndexChanged);
             // 
+            // cbCarBehaviour
+            // 
+            this.cbCarBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCarBehaviour.FormattingEnabled = true;
+            this.cbCarBehaviour.Items.AddRange(new object[] {
+            "Spawn On Enter Road",
+            "Spawn On Start Trial"});
+            this.cbCarBehaviour.Location = new System.Drawing.Point(266, 109);
+            this.cbCarBehaviour.Margin = new System.Windows.Forms.Padding(4);
+            this.cbCarBehaviour.Name = "cbCarBehaviour";
+            this.cbCarBehaviour.Size = new System.Drawing.Size(196, 24);
+            this.cbCarBehaviour.TabIndex = 1;
+            this.cbCarBehaviour.SelectedIndexChanged += new System.EventHandler(this.cbCarBehaviour_SelectedIndexChanged);
+            // 
+            // carBehaviourLabel
+            // 
+            this.carBehaviourLabel.AutoSize = true;
+            this.carBehaviourLabel.Location = new System.Drawing.Point(153, 112);
+            this.carBehaviourLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.carBehaviourLabel.Name = "carBehaviourLabel";
+            this.carBehaviourLabel.Size = new System.Drawing.Size(102, 17);
+            this.carBehaviourLabel.TabIndex = 0;
+            this.carBehaviourLabel.Text = "Car Behaviour:";
+            // 
             // Panel1
             // 
             this.Panel1.Controls.Add(this.btnOk);
@@ -430,26 +451,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(727, 53);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 17);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Offset";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(700, 73);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 22);
-            this.textBox7.TabIndex = 9;
-            this.textBox7.Text = "0";
-            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // Form2
             // 

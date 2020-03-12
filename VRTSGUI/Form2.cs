@@ -8,6 +8,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace VRTSGUI
 { 
@@ -75,26 +76,39 @@ namespace VRTSGUI
             textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             textBox1.Text = "";
         }
-
+        string previousInput = "";
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            bool Flag = false;
-            int i = 0;
-            foreach (char c in textBox1.Text)
+           /* Regex r = new Regex("^-{0,1}\d+\.{0,1}\d*$"); // This is the main part, can be altered to match any desired form or limitations
+            Match m = r.Match(textBox1.Text);
+            if (m.Success)
             {
-                if (c < '0' || c > '9' || i>3)
-                {
-                    Flag = true;
-                    break;
-                }
-                i++;
+                previousInput = textBox1.Text;
             }
-            if(Flag == true)
+            else
             {
-                textBox1.Text = textBox1.Text.Substring(0, i);
-                textBox1.SelectionStart = i;
+                textBox1.Text = previousInput;
+            }*/
+
+        }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Console.WriteLine("NEW KEYYY");
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if (e.KeyChar == '.'
+                && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
             }
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -216,17 +230,20 @@ namespace VRTSGUI
             // DCP is Array 27
             strlist = farLaneSpace.Split(spearator, count, StringSplitOptions.None);
             strlist1 = closeLaneSpace.Split(spearator, count, StringSplitOptions.None);
-            if (Math.Abs(int.Parse(strlist[1]) - int.Parse(strlist1[1])) != int.Parse(textBox7.Text)){
-                strlist1[1] = (int.Parse(strlist1[1]) + int.Parse(textBox7.Text)).ToString();
+            if (textBox7.Text != "None") {
+                Console.WriteLine("HERE");
+                if (Math.Abs(int.Parse(strlist[1]) - int.Parse(strlist1[1])) != int.Parse(textBox7.Text)) {
+                    strlist[1] = (int.Parse(strlist1[1]) + int.Parse(textBox7.Text)).ToString();
+                }
             }
-
-
-            Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
-            Console.WriteLine(string.Join(" ", strlist1));
+            //Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
+            Console.WriteLine(string.Join(" ", strlist));
             for (int i =0; i < strlist1.Length; i++)
             {
-                Console.WriteLine(i + " : " + strlist1[i] + "\n");
+                Console.WriteLine(i + " : " + strlist[i] + "\n");
             }
+
+             
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
@@ -234,7 +251,7 @@ namespace VRTSGUI
             cmd.Parameters.AddWithValue("@trialType", cbTrialType.Text);
             cmd.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
             cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
-            cmd.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist1));
+            cmd.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist));
             cmd.ExecuteNonQuery();
 
             frm1.updateDataTable();

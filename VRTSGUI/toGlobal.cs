@@ -111,51 +111,88 @@ namespace VRTSGUI
             DataTable dt = new DataTable();
             da.Fill(dt);
             StringBuilder output = new StringBuilder();
+            int numEntries = 0;
             foreach (DataRow dr in dt.Rows)
             {
                 foreach (DataColumn col in dt.Columns)
                 {
                     output.AppendFormat("{0},", dr[col]);
+                    
                 }
-
+                numEntries++;
                 output.AppendLine();
+            }
+            if(numEntries == 0)
+            {
+                return;
             }
             Console.WriteLine("KO --");
             Console.WriteLine(output);
             Console.WriteLine("--\n\n");
             String[] strlist1 = new String[200];
             Int32 count1 = 200;
-            char[] spearator1 = { ',', '\0', '\n','\t'};
+            char[] spearator1 = { ',', '\0'};
             string newoutput = output.ToString();
-
-            // DCP is Array 27
-            strlist1 = newoutput.Split(spearator1, count1, StringSplitOptions.None);
-            Console.WriteLine(strlist1[2]);
-            String TrialType = strlist1[1];
-            String TrialBehav = strlist1[2];
-            String CSR1 = strlist1[3];
-            String CSL1 = strlist1[4];
-            String replace = Regex.Replace(CSL1, @"\t|\n|\r|,", "");
-            string[] CSR12 = Regex.Split(CSR1, @"\D+");
-
-            //  Once all values are in array, respective to their lines, then write array element by element to file line by line
-            string finalCSR = string.Join(",", CSR12, 1, CSR12.Length - 1);
-            Console.WriteLine("\n\n" + string.Join(",",CSR12,1, CSR12.Length-1));
-            if(finalCSR[finalCSR.Length-1] == ',')
+            Console.WriteLine(output.ToString().Split('\n')[0]);
+            Console.WriteLine(output.ToString().Split('\n')[0].Split(',')[0]);
+            Console.WriteLine(output.ToString().Split('\n')[0].Split(',')[1]);
+            Console.WriteLine(numEntries);
+            for (int i = 0; i < numEntries; i++)
             {
-                finalCSR = finalCSR.Substring(0, finalCSR.Length - 1);
-            }
-            Console.WriteLine("\n\n" + finalCSR + "\n\n\n");
-            Console.WriteLine(string.Format("TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + replace + "]" + "\n"));
+                newoutput = output.ToString().Split('\n')[i];
+                Console.WriteLine("HERE: " , newoutput);
+                strlist1 = newoutput.Split(spearator1, count1, StringSplitOptions.None);
+                Console.WriteLine(strlist1[2]);
+                String TrialType = strlist1[1];
+                String TrialBehav = strlist1[2];
+                if (TrialBehav == "Spawn On Enter Road")
+                {
+                    TrialBehav = "SPAWNONENTERROAD";
+                }
+                else
+                {
+                    TrialBehav = "SPAWNONSTARTTRIAL";
+                }
+                String CSR1 = strlist1[3];
+                String CSL1 = strlist1[4];
+                String replace = Regex.Replace(CSL1, @"\t|\n|\r|,", "");
+                string[] CSR12 = Regex.Split(CSR1, @"\D+");
+                string[] CSL12 = Regex.Split(replace, @"\D+");
+                //  Once all values are in array, respective to their lines, then write array element by element to file line by line
+                string finalCSR = string.Join(",", CSR12, 1, CSR12.Length - 1);
+                string finalCSL = string.Join(",", CSL12, 1, CSL12.Length - 1);
 
+                Console.WriteLine("\n\n" + string.Join(",", CSR12, 1, CSR12.Length - 1));
+                if (finalCSR[finalCSR.Length - 1] == ',')
+                {
+                    finalCSR = finalCSR.Substring(0, finalCSR.Length - 1);
+                }
+                if (finalCSL[finalCSL.Length - 1] == ',')
+                {
+                    finalCSL = finalCSL.Substring(0, finalCSL.Length - 1);
+                }
+                //Console.WriteLine("\n\n" + finalCSR + "\n\n\n");
+                //Console.WriteLine(string.Format("TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + "\n"));
+                newArray[53 + i] =  string.Format("(TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + ", 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)");
+                
+            }
+            for (int i = 0 ; i<=8; i++)
+            {
+                newArray[53 + numEntries + i] = array[54 + i];
+            }
             // Write the string array to a new file named "WriteLines.txt".--- Will need to be chnaged to Globals.py
             using (StreamWriter outputFile = new StreamWriter(Path.Combine("WriteLines.txt")))
             {
-                for (int i = 0; i < counter; i++)
+                for (int i = 0; i < counter + numEntries; i++)
                 {
-                    outputFile.WriteLine(array[i]);
+                    //outputFile.WriteLine(newArray[i]);
+                    Console.WriteLine(newArray[i]);
                 }
             }
+            //strlist1 = output.ToString().Split('\n');
+            //Console.WriteLine(strlist1[0]);
+            //Console.WriteLine(strlist1[1]);
+            //Console.WriteLine(output[1]);
             //  Now run the python scipt to start main simulation
 
 
