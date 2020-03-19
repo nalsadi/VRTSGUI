@@ -156,8 +156,9 @@ namespace VRTSGUI
                 String CSR1 = strlist1[3];
                 String CSL1 = strlist1[4];
                 String replace = Regex.Replace(CSL1, @"\t|\n|\r|,", "");
-                string[] CSR12 = Regex.Split(CSR1, @"\D+");
-                string[] CSL12 = Regex.Split(replace, @"\D+");
+                string[] CSR12 = Regex.Split(CSR1, @"[^0-9\.]+");
+                string[] CSL12 = Regex.Split(replace, @"[^0-9\.]+");
+                Console.WriteLine("UIUIOUIOUIOUOI " + CSR1);
                 //  Once all values are in array, respective to their lines, then write array element by element to file line by line
                 string finalCSR = string.Join(",", CSR12, 1, CSR12.Length - 1);
                 string finalCSL = string.Join(",", CSL12, 1, CSL12.Length - 1);

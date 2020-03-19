@@ -72,7 +72,7 @@ namespace VRTSGUI
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
             cmd.ExecuteNonQuery();
-            //Data.closeSQLConnection(con);
+
             textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             textBox1.Text = "";
         }
@@ -163,7 +163,7 @@ namespace VRTSGUI
 
         private void textBox6_TextChanged_1(object sender, EventArgs e)
         {
-            bool Flag = false;
+            /*bool Flag = false;
             int i = 0;
             foreach (char c in textBox6.Text)
             {
@@ -178,6 +178,23 @@ namespace VRTSGUI
             {
                 textBox6.Text = textBox6.Text.Substring(0, i);
                 textBox6.SelectionStart = i;
+            }*/
+        }
+        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Console.WriteLine("NEW KEYYY");
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if (e.KeyChar == '.'
+                && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
             }
         }
 
@@ -232,15 +249,16 @@ namespace VRTSGUI
             strlist1 = closeLaneSpace.Split(spearator, count, StringSplitOptions.None);
             if (textBox7.Text != "None") {
                 Console.WriteLine("HERE");
-                if (Math.Abs(int.Parse(strlist[1]) - int.Parse(strlist1[1])) != int.Parse(textBox7.Text)) {
-                    strlist[1] = (int.Parse(strlist1[1]) + int.Parse(textBox7.Text)).ToString();
+                if (Math.Abs(float.Parse(strlist[1]) - float.Parse(strlist1[1])) != float.Parse(textBox7.Text)) {
+                    strlist[1] = (float.Parse(strlist1[1]) + float.Parse(textBox7.Text)).ToString();
                 }
             }
             //Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
             Console.WriteLine(string.Join(" ", strlist));
+            Console.WriteLine("HJK" + strlist1.Length);
             for (int i =0; i < strlist1.Length; i++)
             {
-                Console.WriteLine(i + " : " + strlist[i] + "\n");
+               // Console.WriteLine(i + " : " + strlist[i] + "\n");
             }
 
              
