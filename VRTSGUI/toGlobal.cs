@@ -30,7 +30,7 @@ namespace VRTSGUI
             
             //  Read the file and display it line by line.  
             System.IO.StreamReader file =
-                new System.IO.StreamReader(@"C:\Users\User\source\repos\nalsadi\VRTSGUI\VRTSGUI\Globals.py");
+                new System.IO.StreamReader(@"C:\Users\CDRU\source\repos\VRTSGUI\VRTSGUI\Globals.py");
             while ((line = file.ReadLine()) != null)
             {
                 //System.Console.WriteLine(line);
@@ -168,10 +168,14 @@ namespace VRTSGUI
                 {
                     finalCSR = finalCSR.Substring(0, finalCSR.Length - 1);
                 }
-                if (finalCSL[finalCSL.Length - 1] == ',')
+                if(finalCSL.Length > 0)
                 {
-                    finalCSL = finalCSL.Substring(0, finalCSL.Length - 1);
+                    if (finalCSL[finalCSL.Length - 1] == ',')
+                    {
+                        finalCSL = finalCSL.Substring(0, finalCSL.Length - 1);
+                    }
                 }
+                
                 //Console.WriteLine("\n\n" + finalCSR + "\n\n\n");
                 //Console.WriteLine(string.Format("TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + "\n"));
                 newArray[53 + i] =  string.Format("(TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + ", 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)");
@@ -182,11 +186,11 @@ namespace VRTSGUI
                 newArray[53 + numEntries + i] = array[54 + i];
             }
             // Write the string array to a new file named "WriteLines.txt".--- Will need to be chnaged to Globals.py
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine("WriteLines.txt")))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine("WriteLines.py")))
             {
                 for (int i = 0; i < counter + numEntries; i++)
                 {
-                    //outputFile.WriteLine(newArray[i]);
+                    outputFile.WriteLine(newArray[i]);
                     Console.WriteLine(newArray[i]);
                 }
             }
