@@ -32,13 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Sex = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAge = new System.Windows.Forms.TextBox();
+            this.txtHeight = new System.Windows.Forms.TextBox();
+            this.txtID = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -110,13 +110,13 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.Sex);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtAge);
+            this.groupBox1.Controls.Add(this.txtHeight);
+            this.groupBox1.Controls.Add(this.txtID);
             this.groupBox1.Location = new System.Drawing.Point(9, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
@@ -138,18 +138,18 @@
             this.label4.Text = "Sex:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // comboBox1
+            // Sex
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.Sex.FormattingEnabled = true;
+            this.Sex.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.comboBox1.Location = new System.Drawing.Point(262, 50);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(65, 21);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.Sex.Location = new System.Drawing.Point(262, 50);
+            this.Sex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Sex.Name = "Sex";
+            this.Sex.Size = new System.Drawing.Size(65, 21);
+            this.Sex.TabIndex = 6;
+            this.Sex.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -184,31 +184,31 @@
             this.label1.Text = "Height (m):";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
-            // textBox3
+            // txtAge
             // 
-            this.textBox3.Location = new System.Drawing.Point(166, 50);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(53, 20);
-            this.textBox3.TabIndex = 3;
+            this.txtAge.Location = new System.Drawing.Point(166, 50);
+            this.txtAge.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAge.Name = "txtAge";
+            this.txtAge.Size = new System.Drawing.Size(53, 20);
+            this.txtAge.TabIndex = 3;
             // 
-            // textBox2
+            // txtHeight
             // 
-            this.textBox2.Location = new System.Drawing.Point(70, 50);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(53, 20);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtHeight.Location = new System.Drawing.Point(70, 50);
+            this.txtHeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Size = new System.Drawing.Size(53, 20);
+            this.txtHeight.TabIndex = 2;
+            this.txtHeight.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // textBox1
+            // txtID
             // 
-            this.textBox1.Location = new System.Drawing.Point(171, 17);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(53, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            this.txtID.Location = new System.Drawing.Point(171, 16);
+            this.txtID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(53, 20);
+            this.txtID.TabIndex = 1;
+            this.txtID.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // groupBox2
             // 
@@ -654,6 +654,7 @@
             this.cbPreset.Name = "cbPreset";
             this.cbPreset.Size = new System.Drawing.Size(160, 21);
             this.cbPreset.TabIndex = 0;
+            this.cbPreset.SelectedIndexChanged += new System.EventHandler(this.CbPreset_SelectedIndexChanged);
             // 
             // btnSetPreset
             // 
@@ -825,12 +826,12 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAge;
+        private System.Windows.Forms.TextBox txtHeight;
+        private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox Sex;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;

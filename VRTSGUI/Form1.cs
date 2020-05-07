@@ -88,7 +88,7 @@ namespace VRTSGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox2.Text = textBox5.Text;
+            txtHeight.Text = textBox5.Text;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -228,7 +228,11 @@ namespace VRTSGUI
             //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             //textBox1.Text = "";
             toGlobal fileStuff = new toGlobal();
-            fileStuff.ee();
+            fileStuff.ee(txtID.Text, txtAge.Text, Sex.Text, txtHeight.Text);
+            cmd.ExecuteNonQuery();
+            String query = "DELETE FROM dbo.properties";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
         }
 
         private void txtNearMissDistance_TextChanged(object sender, EventArgs e)
@@ -239,7 +243,7 @@ namespace VRTSGUI
         public void btnVisualTest_Click(object sender, EventArgs e)
         {
             toGlobal fileStuff = new toGlobal();
-            fileStuff.ee();
+            //`fileStuff.ee();
 
             SQLfx Data = new SQLfx();
 
@@ -352,6 +356,11 @@ namespace VRTSGUI
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CbPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -48,7 +48,7 @@ max_check_angle = -113.0  # beyond this angle they can no longer see the road fr
 checkMaxAnglePitch = 20  #######
 practiceTrialsMeanVelocity = 0
 timeStamp = str(int(time.mktime(time.localtime())))
-participantInputType = ParticipantInputType.OCULUS
+participantInputType = ParticipantInputType.HMD
 trialInits = \
 [\
 (TrialType.STANDARD_ConstantGap_PRE, None, CarBehaviour.SPAWNONSTARTTRIAL, [54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54], [], 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)

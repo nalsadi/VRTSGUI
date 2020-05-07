@@ -15,7 +15,7 @@ namespace VRTSGUI
 {
     public class toGlobal
     {
-        public void ee()
+        public void ee(String PartID, String PartAge, String PartSex, String PartHeight)
         {
             Form1 mainForm = new Form1();
             SQLfx Data = new SQLfx();
@@ -53,6 +53,7 @@ namespace VRTSGUI
             String PCA = Data.printString("properties", "PCA");
             String MPA = Data.printString("properties", "MPA");
 
+
             String CSR = Data.printCS("trialList", "CarSpaceRight");
             
             ///////// -------- Line By Line Parse and Modify Values From Array ----------------------
@@ -83,6 +84,17 @@ namespace VRTSGUI
             // RND is Array 34
             strlist = array[33].Split(spearator, count, StringSplitOptions.None);
             array[33] = strlist[0] + " = " + RND;
+
+            // ID is Array 41
+            strlist = array[40].Split(spearator, count, StringSplitOptions.None);
+            array[40] = strlist[0] + " = " + "'" + PartID + "'" ;
+            // participantVariableNames is Array 42
+            array[41] = "participantVariableNames = "+ "["+ "'" + PartID + "'" +","+ "'" + PartAge + "'" + "," + "'" + PartSex + "'" + "," + "'" + PartHeight + "'" + "]"; 
+
+
+
+
+
 
             // FCA is Array 45
             strlist = array[44].Split(spearator, count, StringSplitOptions.None);
@@ -147,7 +159,7 @@ namespace VRTSGUI
                 String TrialBehav = strlist1[2];
                 if (TrialBehav == "Spawn On Enter Road")
                 {
-                    TrialBehav = "SPAWNONENTERROAD";
+                    TrialBehav = "SPAWNONROADENTER";
                 }
                 else
                 {
@@ -175,9 +187,11 @@ namespace VRTSGUI
                         finalCSL = finalCSL.Substring(0, finalCSL.Length - 1);
                     }
                 }
-                
+
                 //Console.WriteLine("\n\n" + finalCSR + "\n\n\n");
                 //Console.WriteLine(string.Format("TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + "\n"));
+                TrialType = TrialType.Replace("-", "_");
+                TrialType = TrialType.ToUpper();
                 newArray[53 + i] =  string.Format("(TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + ", 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)");
                 
             }
@@ -186,7 +200,7 @@ namespace VRTSGUI
                 newArray[53 + numEntries + i] = array[54 + i];
             }
             // Write the string array to a new file named "WriteLines.txt".--- Will need to be chnaged to Globals.py
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine("WriteLines.py")))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(@"C:\vr\vr3\Globals.py")))
             {
                 for (int i = 0; i < counter + numEntries; i++)
                 {
