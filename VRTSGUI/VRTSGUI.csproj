@@ -110,6 +110,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DatabaseDataSet.xsc">
       <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
@@ -155,6 +156,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\cornerstone-hires %281%29.png" />
+    <None Include="Resources\University_of_Guelph_logo.svg_.png" />
+    <None Include="Resources\univisor_univ_guelph_01_1280x720.jpg" />
+    <Content Include="VizCode.vb" />
     <Content Include="VRTS.ico" />
     <Content Include="vrts_VOJ_icon.ico" />
   </ItemGroup>

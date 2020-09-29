@@ -1156,7 +1156,7 @@ namespace VRTSGUI {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public propertiesRow AddpropertiesRow(int DCP, int NMD, int RSD, int RND, int FCA, int PCA, int MPA) {
+            public propertiesRow AddpropertiesRow(string DCP, int NMD, int RSD, int RND, int FCA, int PCA, int MPA) {
                 propertiesRow rowpropertiesRow = ((propertiesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1211,7 +1211,7 @@ namespace VRTSGUI {
             private void InitClass() {
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
-                this.columnDCP = new global::System.Data.DataColumn("DCP", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnDCP = new global::System.Data.DataColumn("DCP", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDCP);
                 this.columnNMD = new global::System.Data.DataColumn("NMD", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNMD);
@@ -2460,10 +2460,10 @@ namespace VRTSGUI {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int DCP {
+            public string DCP {
                 get {
                     try {
-                        return ((int)(this[this.tableproperties.DCPColumn]));
+                        return ((string)(this[this.tableproperties.DCPColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DCP\' in table \'properties\' is DBNull.", e);

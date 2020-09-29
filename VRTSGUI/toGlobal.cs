@@ -30,14 +30,14 @@ namespace VRTSGUI
             
             //  Read the file and display it line by line.  
             System.IO.StreamReader file =
-                new System.IO.StreamReader(@"C:\Users\CDRU\source\repos\VRTSGUI\VRTSGUI\Globals.py");
+                new System.IO.StreamReader(@"C:\vr\vr3\VRTSGUI\VRTSGUI\GlobalsBackup.py");
             while ((line = file.ReadLine()) != null)
             {
                 //System.Console.WriteLine(line);
                 array[counter] = line;
                 counter++;
             }
-            System.Console.WriteLine("\n\nHERE: {0} ", array[26]);
+            System.Console.WriteLine("\n\nHERE: {0}     ", array[26]);
             file.Close();
             //System.Console.WriteLine("There were {0} lines.", counter);
             // Suspend the screen.  
@@ -46,18 +46,18 @@ namespace VRTSGUI
             ///////// -------- Get Values From SQL Database, Stored As Local Variables ----------------------
 
             String DCP = Data.printString("properties", "DCP");
+            Console.WriteLine("XXXXXXXXXXXXXXX DCP " + DCP);
             String NMD = Data.printString("properties", "NMD");
             String RSD = Data.printString("properties", "RSD");
             String RND = Data.printString("properties", "RND");
             String FCA = Data.printString("properties", "FCA");
             String PCA = Data.printString("properties", "PCA");
             String MPA = Data.printString("properties", "MPA");
-
-
+            String ist = Data.printString("properties", "IST");
             String CSR = Data.printCS("trialList", "CarSpaceRight");
-            
-            ///////// -------- Line By Line Parse and Modify Values From Array ----------------------
 
+            ///////// -------- Line By Line Parse and Modify Values From Array ----------------------
+           
             char[] spearator = {'='};
             Int32 count = 2;
             String final = "";
@@ -77,6 +77,10 @@ namespace VRTSGUI
             strlist = array[27].Split(spearator, count, StringSplitOptions.None);
             array[27] = strlist[0] + " = " + NMD;
 
+            // RSD is Array 31
+            strlist = array[31].Split(spearator, count, StringSplitOptions.None);
+            array[31] = strlist[0] + " = " + ist;
+
             // RSD is Array 33
             strlist = array[32].Split(spearator, count, StringSplitOptions.None);
             array[32] = strlist[0] + " = " + RSD;
@@ -88,12 +92,8 @@ namespace VRTSGUI
             // ID is Array 41
             strlist = array[40].Split(spearator, count, StringSplitOptions.None);
             array[40] = strlist[0] + " = " + "'" + PartID + "'" ;
-            // participantVariableNames is Array 42
-            array[41] = "participantVariableNames = "+ "["+ "'" + PartID + "'" +","+ "'" + PartAge + "'" + "," + "'" + PartSex + "'" + "," + "'" + PartHeight + "'" + "]"; 
-
-
-
-
+            // participantVariableValues is Array 43
+            array[42] = "participantVariableValues = "+ "["+ "'" + PartID + "'" +","+ "'" + PartAge + "'" + "," + "'" + PartSex + "'" + "," + "'" + PartHeight + "'" + "]"; 
 
 
             // FCA is Array 45
@@ -154,9 +154,13 @@ namespace VRTSGUI
                 newoutput = output.ToString().Split('\n')[i];
                 Console.WriteLine("HERE: " , newoutput);
                 strlist1 = newoutput.Split(spearator1, count1, StringSplitOptions.None);
-                Console.WriteLine(strlist1[2]);
+                Console.WriteLine(newoutput);
                 String TrialType = strlist1[1];
                 String TrialBehav = strlist1[2];
+                //Console.WriteLine("ANALYSIS"+  strlist1 +  newoutput + "\n"+strlist1[6]);
+                string trialSpeed = strlist1[6];
+                string trialcond = strlist1[7];
+                String prepost = strlist1[8];
                 if (TrialBehav == "Spawn On Enter Road")
                 {
                     TrialBehav = "SPAWNONROADENTER";
@@ -174,11 +178,15 @@ namespace VRTSGUI
                 //  Once all values are in array, respective to their lines, then write array element by element to file line by line
                 string finalCSR = string.Join(",", CSR12, 1, CSR12.Length - 1);
                 string finalCSL = string.Join(",", CSL12, 1, CSL12.Length - 1);
+                
 
                 Console.WriteLine("\n\n" + string.Join(",", CSR12, 1, CSR12.Length - 1));
-                if (finalCSR[finalCSR.Length - 1] == ',')
+                if (finalCSR.Length > 0)
                 {
-                    finalCSR = finalCSR.Substring(0, finalCSR.Length - 1);
+                    if (finalCSR[finalCSR.Length - 1] == ',')
+                    {
+                        finalCSR = finalCSR.Substring(0, finalCSR.Length - 1);
+                    }
                 }
                 if(finalCSL.Length > 0)
                 {
@@ -192,8 +200,19 @@ namespace VRTSGUI
                 //Console.WriteLine(string.Format("TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + "\n"));
                 TrialType = TrialType.Replace("-", "_");
                 TrialType = TrialType.ToUpper();
-                newArray[53 + i] =  string.Format("(TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + ", 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)");
-                
+                if (TrialType == "STANDARD_CONSTANTGAP_PRE")
+                {
+                    TrialType = "STANDARD_ConstantGap_PRE";
+                }
+                if(numEntries == 1 || i == numEntries-1)
+                {
+                    newArray[53 + i] = string.Format("(TrialType." + TrialType +", " + trialcond + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "], " + trialSpeed+ " , " + trialSpeed + ", 1, 1, True, 0, 0, AvatarBehaviour.NONE" + ", " + prepost+ ")");
+                }
+                else
+                {
+                    newArray[53 + i] = string.Format("(TrialType." + TrialType + ", " + trialcond + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "], " + trialSpeed+" , "+ trialSpeed + ", 1, 1, True, 0, 0, AvatarBehaviour.NONE" + ", " + prepost + "),");
+                }
+
             }
             for (int i = 0 ; i<=8; i++)
             {
@@ -214,7 +233,7 @@ namespace VRTSGUI
             //Console.WriteLine(output[1]);
             //  Now run the python scipt to start main simulation
 
-
+            Console.WriteLine("Printing to global completed");
 
 
             //  Clean out database when all values have been put into file

@@ -42,6 +42,8 @@ namespace VRTSGUI
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            updatePresetTable();
+
 
         }
 
@@ -68,13 +70,21 @@ namespace VRTSGUI
 
             String query = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES (@CarListSpaceRight)";
             //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+            string prev = textBox1.Text;
+            if(radioButton4.Checked == true && textBox1.TextLength != 0)
+            {
+                float value = float.Parse(textBox1.Text) * (float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778")) ;
+                textBox1.Text = Convert.ToString(value);
+            }
 
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
+            textBox1.Text = prev;
             cmd.ExecuteNonQuery();
 
             textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
-            textBox1.Text = "";
+            
+            //textBox1.Text = "";
         }
         string previousInput = "";
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -206,13 +216,20 @@ namespace VRTSGUI
 
             String query = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES (@CarListSpaceLeft)";
             //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
-
+            string prev = textBox6.Text;
             SqlCommand cmd = new SqlCommand(query, con);
+            if (radioButton4.Checked == true && textBox6.TextLength != 0)
+            {
+                float value = float.Parse(textBox6.Text) * (float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778") );
+                textBox6.Text = Convert.ToString(value);
+            }
+
             cmd.Parameters.AddWithValue("@CarListSpaceLeft", textBox6.Text);
+            textBox6.Text = prev;
             cmd.ExecuteNonQuery();
             //Data.closeSQLConnection(con);
             textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
-            textBox6.Text = "";
+           // textBox6.Text = "";
 
         }
 
@@ -237,6 +254,7 @@ namespace VRTSGUI
             String farLaneSpace = Data.printString("CarListSpaceLeft", "CarListSpaceLeft") ;
             String closeLaneSpace = Data.printString("CarListSpaceRight", "CarListSpaceRight");
 
+     
             Int32 count = 210;
             String final = "";
             String[] strlist = new String[210];
@@ -247,33 +265,69 @@ namespace VRTSGUI
             // DCP is Array 27
             strlist = farLaneSpace.Split(spearator, count, StringSplitOptions.None);
             strlist1 = closeLaneSpace.Split(spearator, count, StringSplitOptions.None);
+            string prev = textBox7.Text;
             if (textBox7.Text != "None") {
                 Console.WriteLine("HERE");
+               
+                if(radioButton4.Checked == true) {
+                    textBox7.Text = Convert.ToString(float.Parse(textBox7.Text) * (float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778")));
+                }
                 if (Math.Abs(float.Parse(strlist[1]) - float.Parse(strlist1[1])) != float.Parse(textBox7.Text)) {
                     strlist[1] = (float.Parse(strlist1[1]) + float.Parse(textBox7.Text)).ToString();
                 }
             }
+            textBox7.Text = prev;
             //Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
             Console.WriteLine(string.Join(" ", strlist));
             Console.WriteLine("HJK" + strlist1.Length);
-            for (int i =0; i < strlist1.Length; i++)
+
+            String prepost = "None";
+            if (radioButton5.Checked == true)
             {
-               // Console.WriteLine(i + " : " + strlist[i] + "\n");
+                prepost = "'pre'";
+            }
+            else
+            {
+                prepost = "'post'";
             }
 
-             
+            String CLSR = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+            String trialcond = "'" + textBox8.Text + "'";
+            String Speed = Convert.ToString(float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778"));
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft);";
+            cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft,speed,trialCond,prepost) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft,@speed,@trialCond,@prepost);";
             cmd.Parameters.AddWithValue("@trialType", cbTrialType.Text);
             cmd.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
             cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
             cmd.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist));
+            cmd.Parameters.AddWithValue("@speed", Speed );
+            cmd.Parameters.AddWithValue("@trialCond", trialcond);
+            cmd.Parameters.AddWithValue("@prepost", prepost);
             cmd.ExecuteNonQuery();
 
-            frm1.updateDataTable();
-            this.Close();
+            //frm1.updateDataTable();
+            //this.Close();
+
+            if (radioButton7.Checked == true)
+            {
+                SqlConnection con2 = Data.openSQLConnection(); // Open SQL Connection
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.Connection = con;
+                cmd2.CommandText = "INSERT INTO trialPresets (trialType, trialBehav,CarSpaceRight,CarSpaceLeft,speed,trialCond,prepost) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft,@speed,@trialCond,@prepost);";
+                cmd2.Parameters.AddWithValue("@trialType", cbTrialType.Text);
+                cmd2.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
+                cmd2.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
+                cmd2.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist));
+                cmd2.Parameters.AddWithValue("@speed", Speed);
+                cmd2.Parameters.AddWithValue("@trialCond", trialcond);
+                cmd2.Parameters.AddWithValue("@prepost", prepost);
+                cmd2.ExecuteNonQuery();
+            }
+
+
+
 
             String query = "DELETE FROM dbo.CarListSpaceRight";
             cmd = new SqlCommand(query, con);
@@ -282,8 +336,10 @@ namespace VRTSGUI
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
             // cmd.Connection = con;
-            //this.Hide();
+            this.Hide();
 
+            frm1.updateDataTable();
+            this.Close();
 
         }
 
@@ -308,6 +364,153 @@ namespace VRTSGUI
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RadioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtContinuousCarSpeed_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GroupBox6_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        public void updatePresetTable()
+        {
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            SqlCommand cmd = new SqlCommand();
+
+            // cmd.Connection = con;
+
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Id, trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft  FROM trialPresets", con);
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+            dataGridView1.DataSource = dtbl;
+            dataGridView1.Columns[0].HeaderText = "Id";
+            dataGridView1.Columns[1].HeaderText = "Trial Type";
+            dataGridView1.Columns[2].HeaderText = "Pre/Post";
+            dataGridView1.Columns[3].HeaderText = "Trial Condition";
+            dataGridView1.Columns[4].HeaderText = "Trial Behaviour";
+            dataGridView1.Columns[5].HeaderText = "Car Speed";
+            dataGridView1.Columns[6].HeaderText = "Right Facing Car Space";
+            dataGridView1.Columns[7].HeaderText = "Left Facing Car Space";
+
+
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridView1.Columns[0].Visible = false;
+
+            dataGridView1.ReadOnly = true;
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            string index  = "-1" ;
+    
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    return;
+                }
+                index = Convert.ToString(row.Cells[0].Value.ToString());
+
+
+            }
+            if (index == "-1")
+            {
+                return;
+            }
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "DELETE FROM trialPresets WHERE ID= " + index;
+
+            Console.WriteLine(query);
+            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            updatePresetTable();
+
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            string index = "-1";
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    return;
+                }
+                index = Convert.ToString(row.Cells[0].Value.ToString());
+
+
+            }
+            if (index == "-1")
+            {
+                return;
+            }
+
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            Console.WriteLine(index);
+            //String query = "INSERT INTO trialList " + "SELECT * FROM trialPresets" + " WHERE ID=" + index;
+            String query = "insert into trialList(trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft) select trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft from trialPresets where ID=" + index + ";";
+            Console.WriteLine(query);
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            frm1.updateDataTable();
+            this.Close();
+
+        }
+
+        private void RadioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RadioButton8_CheckedChanged(object sender, EventArgs e)
         {
 
         }

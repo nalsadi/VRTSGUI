@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace VRTSGUI
 {
@@ -215,24 +216,31 @@ namespace VRTSGUI
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "INSERT INTO properties (DCP, NMD, RSD, RND, FCA, PCA, MPA) VALUES (@DCP, @NMD, @RSD, @RND, @FCA, @PCA, @MPA);";
-            cmd.Parameters.AddWithValue("@DCP", txtDataCollectionPeriod.Text);
+            cmd.CommandText = "INSERT INTO properties (DCP, NMD, RSD, RND, FCA, PCA, MPA, IST) VALUES (@DCP, @NMD, @RSD, @RND, @FCA, @PCA, @MPA, @IST);";
+            cmd.Parameters.AddWithValue("@DCP", Convert.ToString(txtDataCollectionPeriod.Text));
             cmd.Parameters.AddWithValue("@NMD", txtNearMissDistance.Text);
             cmd.Parameters.AddWithValue("@RSD", txtRespawnStartDistance.Text);
             cmd.Parameters.AddWithValue("@RND", txtRespawnEndDistance.Text);
             cmd.Parameters.AddWithValue("@FCA", txtFullCheckAngle.Text);
             cmd.Parameters.AddWithValue("@PCA", txtPartialCheckAngle.Text);
             cmd.Parameters.AddWithValue("@MPA", txtMaxPitchAngle.Text);
+            cmd.Parameters.AddWithValue("@IST", iST.Text);
             cmd.ExecuteNonQuery();
             //Data.closeSQLConnection(con);
             //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             //textBox1.Text = "";
             toGlobal fileStuff = new toGlobal();
+            if(txtID.Text.Length == 0)
+            {
+                txtID.Text = "ID";
+            }
             fileStuff.ee(txtID.Text, txtAge.Text, Sex.Text, txtHeight.Text);
             cmd.ExecuteNonQuery();
             String query = "DELETE FROM dbo.properties";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
+            Process.Start(@"C:\vr\vr3\main.py");
+
         }
 
         private void txtNearMissDistance_TextChanged(object sender, EventArgs e)
@@ -267,20 +275,29 @@ namespace VRTSGUI
 
             // cmd.Connection = con;
 
-            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT trialType, trialBehav, CarSpaceRight, CarSpaceLeft FROM trialList", con);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft  FROM trialList", con);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             dataGridView1.DataSource = dtbl;
             dataGridView1.Columns[0].HeaderText = "Trial Type";
-            dataGridView1.Columns[1].HeaderText = "Trial Behaviour";
-            dataGridView1.Columns[2].HeaderText = "Right Facing Car Space";
-            dataGridView1.Columns[3].HeaderText = "Left Facing Car Space";
+            dataGridView1.Columns[1].HeaderText = "Pre/Post";
+            dataGridView1.Columns[2].HeaderText = "Trial Condition";
+            dataGridView1.Columns[3].HeaderText = "Trial Behaviour";
+            dataGridView1.Columns[4].HeaderText = "Car Speed";
+            dataGridView1.Columns[5].HeaderText = "Right Facing Car Space";
+            dataGridView1.Columns[6].HeaderText = "Left Facing Car Space";
+
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             dataGridView1.ReadOnly = true;
         }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -298,6 +315,7 @@ namespace VRTSGUI
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
 
             String query = "DELETE FROM trialList WHERE ID=(SELECT MAX(Id) FROM trialList)";
+
             //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
             SqlCommand cmd = new SqlCommand(query, con);
             //cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
@@ -318,6 +336,7 @@ namespace VRTSGUI
             DataTable dt = new DataTable();
             da.Fill(dt);
             StringBuilder output = new StringBuilder();
+            int checker = 0;
             foreach (DataRow dr in dt.Rows)
             { 
                 foreach (DataColumn col in dt.Columns)
@@ -325,33 +344,40 @@ namespace VRTSGUI
                     output.AppendFormat("{0},", dr[col]);
                 }
 
-                output.AppendLine();
+                checker = 1;
             }
-            Console.WriteLine(output);
-            String[] strlist = new String[5];
-            Int32 count = 5;
-            char[] spearator = { ',', '\0', '\n'};
-            string newoutput = output.ToString();
+            if (checker == 1)
+            {
+                Console.WriteLine(output);
+                String[] strlist = new String[1000];
+                Int32 count = 200;
+                char[] spearator = { ',', '\0', '\n' };
+                string newoutput = output.ToString();
 
-            // DCP is Array 27
-            strlist = newoutput.Split(spearator, count, StringSplitOptions.None);
-            Console.WriteLine(strlist[2]);
-            String TrialType = strlist[1];
-            String TrialBehav = strlist[2];
-            String CSR = strlist[3];
-            String CSL = strlist[4];
+                strlist = newoutput.Split(spearator, count, StringSplitOptions.None);
+                Console.WriteLine("COPYUNG" + newoutput + strlist[8]);
+                String TrialType = strlist[1];
+                String TrialBehav = strlist[2];
+                String CSR = strlist[3];
+                String CSL = strlist[4];
+                String trialspeed = strlist[6];
+                String trialcond = strlist[7];
+                String prepost = strlist[8];
 
-            String replace = Regex.Replace(CSL, @"\t|\n|\r|,", "");
-            //CSL[CSL.Length -1] = "/0";
-            cmd.Connection = con;
-            cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft);";
-            cmd.Parameters.AddWithValue("@trialType", TrialType);
-            cmd.Parameters.AddWithValue("@trialBehav", TrialBehav);
-            cmd.Parameters.AddWithValue("@CarSpaceRight",CSR);
-            cmd.Parameters.AddWithValue("@CarSpaceLeft", replace);
-            cmd.ExecuteNonQuery();
-            updateDataTable();
-
+                String replace = Regex.Replace(CSL, @"\t|\n|\r|,", "");
+                //CSL[CSL.Length -1] = "/0";
+                cmd.Connection = con;
+                cmd.CommandText = "INSERT INTO trialList (trialType, trialBehav,CarSpaceRight,CarSpaceLeft,speed,trialCond,prepost) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft,@speed,@trialCond,@prepost);";
+                cmd.Parameters.AddWithValue("@trialType", TrialType);
+                cmd.Parameters.AddWithValue("@trialBehav", TrialBehav);
+                cmd.Parameters.AddWithValue("@CarSpaceRight", CSR);
+                cmd.Parameters.AddWithValue("@CarSpaceLeft", replace);
+                cmd.Parameters.AddWithValue("@speed", trialspeed);
+                cmd.Parameters.AddWithValue("@trialCond", trialcond);
+                cmd.Parameters.AddWithValue("@prepost", prepost);
+                cmd.ExecuteNonQuery();
+                updateDataTable();
+            }
 
         }
 
@@ -361,6 +387,70 @@ namespace VRTSGUI
         }
 
         private void CbPreset_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtRespawnStartDistance_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        static void ExecuteBashCommand()
+        {
+            // full path of python interpreter 
+            string python = @"C:\Program Files\WorldViz\Vizard6\bin\python.exe";
+
+            // python app to call 
+            Directory.SetCurrentDirectory(@"C:\vr\vr3");
+            string myPythonApp = "main.py";
+
+            // dummy parameters to send Python script 
+            int x = 2;
+            int y = 5;
+
+            // Create new process start info 
+            ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(python);
+
+            // make sure we can read the output from stdout 
+            myProcessStartInfo.UseShellExecute = false;
+            myProcessStartInfo.RedirectStandardOutput = true;
+
+            // start python app with 3 arguments  
+            // 1st arguments is pointer to itself,  
+            // 2nd and 3rd are actual arguments we want to send 
+            myProcessStartInfo.Arguments = myPythonApp + " " + x + " " + y;
+
+            Process myProcess = new Process();
+            // assign start information to the process 
+            myProcess.StartInfo = myProcessStartInfo;
+
+            Console.WriteLine("Calling Python script with arguments {0} and {1}", x, y);
+            // start the process 
+            myProcess.Start();
+
+            // Read the standard output of the app we called.  
+            // in order to avoid deadlock we will read output first 
+            // and then wait for process terminate: 
+            StreamReader myStreamReader = myProcess.StandardOutput;
+            string myString = myStreamReader.ReadLine();
+
+            /*if you need to read multiple lines, you might use: 
+                string myString = myStreamReader.ReadToEnd() */
+
+            // wait exit signal from the app we called and then close it. 
+            myProcess.WaitForExit();
+            myProcess.Close();
+
+            // write the output we got from python app 
+            Console.WriteLine("Value received from script: " + myString);
+        }
+
+        private void Label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DatabaseDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }

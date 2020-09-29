@@ -4,6 +4,10 @@
 
     partial class DatabaseDataSet1
     {
+        partial class propertiesDataTable
+        {
+        }
+
         partial class trialListDataTable
         {
 

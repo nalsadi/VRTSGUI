@@ -8,14 +8,14 @@ import time
 # GLOBAL VARIABLES
 ###
 # ****************************************** '
-# Using vizconnect_file:'optical_heading_with_marker_ids.py'
+# Using vizconnect_file:'viz_move_walking_VR.py'
 # ****************************************** '
-vizconnect_file='optical_heading_with_marker_ids.py'
+vizconnect_file='viz_move_walking_VR.py'
 startingHotspotCenter = -1
 startingHotspotDepth = 1
 startingPosition = []
 trackerurl = "PPT0@192.168.99.1"
-headset_fov = 46.852  # diagonal fov = 60, so horizontal (by Pythagorean theorem) is 46.852
+headset_fov = 80  # diagonal fov = 60, so horizontal (by Pythagorean theorem) is 46.852 -- (now using oculus in steroscopic - Changed to 80
 RADTODEG = 57.2957795
 numTypesofCars = 15
 randomize_car_spawn_order = False
@@ -24,15 +24,15 @@ numOfLanes = 1
 closeLaneCenterZ = roadWidth * 0.25
 farLaneCenterZ = roadWidth * 0.75
 timetoCross = 2.0
-dataCollectionPeriod = 0.01 #######
-nearMissDistance = 1#######
+dataCollectionPeriod = 0.01
+nearMissDistance = 1
 criticalPoint = 1.375
 hesitationVelThresh = 0.1
 hesitationTimeThresh = 0.3
-initialSpawnTime = 2
-respawnStart = -200 #######
-respawnEnd = 130  #######
-dataDirectoryPath = 'C:\\vr\\vr\\3.0\\_testing_data\\'
+initialSpawnTime = 6.21
+respawnStart = -200
+respawnEnd = 130
+dataDirectoryPath = 'C:\\vr\\vr3\\_testing_data\\'
 dataFileExtension  = ".txt"
 currentTrial = None
 initialFlowState = FlowState.FREERANGE
@@ -41,17 +41,17 @@ avgCarLength = 2.7
 participantId = "ID"
 participantVariableNames = ['ParticipantId','ParticipantAge','ParticipantSex','ParticipantHeight']
 participantVariableValues = ['ID', 18, 'Male', 1.82]
-initialMainViewPosition = [0,1.82,-0.7]
-fullCheckAngle = 65  #######
-partialCheckAngle = 45  #######
+initialMainViewPosition = [0,1.82,-2.7]
+fullCheckAngle = 65
+partialCheckAngle = 45
 max_check_angle = -113.0  # beyond this angle they can no longer see the road from the starting point
-checkMaxAnglePitch = 20  #######
+checkMaxAnglePitch = 20
 practiceTrialsMeanVelocity = 0
 timeStamp = str(int(time.mktime(time.localtime())))
-participantInputType = ParticipantInputType.OCULUS
+participantInputType = ParticipantInputType.HMD
 trialInits = \
 [\
-(TrialType.STANDARD_ConstantGap_PRE, None, CarBehaviour.SPAWNONSTARTTRIAL, [54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54,54.54], [], 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)
+(TrialType.STANDARD_ConstantGap_PRE, None, CarBehaviour.SPAWNONSTARTTRIAL, [83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33,83.33], [], 13.888888888888888888888888889, 13.888888888888888888888888889, 1, 1, True, 0, 0, AvatarBehaviour.NONE)
 ]
 carsInits = \
 [

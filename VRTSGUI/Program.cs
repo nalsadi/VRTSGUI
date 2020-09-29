@@ -48,7 +48,7 @@ namespace VRTSGUI
     {
         public SqlConnection openSQLConnection()
         {
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\CDRU\source\repos\VRTSGUI\VRTSGUI\Database.mdf;Integrated Security=True;Connect Timeout=30");
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\vr\vr3\VRTSGUI\VRTSGUI\Database.mdf;Integrated Security=True;Connect Timeout=30");
             con.Open();
             return con;
         }
