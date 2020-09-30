@@ -751,6 +751,7 @@
             this.btnEditTrial.TabIndex = 20;
             this.btnEditTrial.Text = "Edit Trial...";
             this.btnEditTrial.UseVisualStyleBackColor = true;
+            this.btnEditTrial.Click += new System.EventHandler(this.BtnEditTrial_Click);
             // 
             // btnRemoveTrial
             // 

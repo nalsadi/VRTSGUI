@@ -140,6 +140,7 @@ namespace VRTSGUI
         {
             Form2 frm = new Form2(this);
             //this.Hide();
+            frm.button8.Visible = false;
             frm.Show();
         }
 
@@ -275,17 +276,19 @@ namespace VRTSGUI
 
             // cmd.Connection = con;
 
-            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft  FROM trialList", con);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Id, trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft  FROM trialList", con);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             dataGridView1.DataSource = dtbl;
-            dataGridView1.Columns[0].HeaderText = "Trial Type";
-            dataGridView1.Columns[1].HeaderText = "Pre/Post";
-            dataGridView1.Columns[2].HeaderText = "Trial Condition";
-            dataGridView1.Columns[3].HeaderText = "Trial Behaviour";
-            dataGridView1.Columns[4].HeaderText = "Car Speed";
-            dataGridView1.Columns[5].HeaderText = "Right Facing Car Space";
-            dataGridView1.Columns[6].HeaderText = "Left Facing Car Space";
+            dataGridView1.Columns[0].HeaderText = "Id";
+            dataGridView1.Columns[1].HeaderText = "Trial Type";
+            dataGridView1.Columns[2].HeaderText = "Pre/Post";
+            dataGridView1.Columns[3].HeaderText = "Trial Condition";
+            dataGridView1.Columns[4].HeaderText = "Trial Behaviour";
+            dataGridView1.Columns[5].HeaderText = "Car Speed";
+            dataGridView1.Columns[6].HeaderText = "Right Facing Car Space";
+            dataGridView1.Columns[7].HeaderText = "Left Facing Car Space";
+
 
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -294,6 +297,9 @@ namespace VRTSGUI
             dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridView1.Columns[0].Visible = false;
 
             dataGridView1.ReadOnly = true;
         }
@@ -452,6 +458,145 @@ namespace VRTSGUI
 
         private void DatabaseDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void BtnEditTrial_Click(object sender, EventArgs e)
+        {
+            string index = "-1";
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    return;
+                }
+                index = Convert.ToString(row.Cells[0].Value.ToString());
+
+
+            }
+            if (index == "-1")
+            {
+                return;
+            }
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "SELECT * FROM trialList WHERE ID= " + index;
+
+            Console.WriteLine(query);
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            StringBuilder output = new StringBuilder();
+            int numEntries = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (DataColumn col in dt.Columns)
+                {
+                    output.AppendFormat("{0},", dr[col]);
+
+                }
+                numEntries++;
+                output.AppendLine();
+            }
+            Console.WriteLine(output);
+
+            String[] strlist1 = new String[200];
+            Int32 count1 = 200;
+            char[] spearator1 = { ',', '\0' };
+            string newoutput = output.ToString();
+            Console.WriteLine(output.ToString().Split('\n')[0]);
+            Console.WriteLine(output.ToString().Split('\n')[0].Split(',')[0]);
+            Console.WriteLine(output.ToString().Split('\n')[0].Split(',')[1]);
+            Console.WriteLine(numEntries);
+
+            strlist1 = newoutput.Split(spearator1, count1, StringSplitOptions.None);
+            String TrialType = strlist1[1];
+            String TrialBehav = strlist1[2];
+            String trialSpeed = strlist1[6];
+            String trialcond = strlist1[7];
+            String prepost = strlist1[8];
+            String CSR1 = strlist1[3];
+            String CSL1 = strlist1[4];
+
+            Console.WriteLine(TrialType + TrialBehav + trialSpeed + trialcond + prepost + CSR1 + CSL1);
+            Form2 frm = new Form2(this);
+            frm.Editing.Visible = true;
+            frm.btnOk.Visible = false;
+            frm.button6.Visible = false;
+            frm.ID.Text = index;
+            frm.Show();
+            frm.cbTrialType.Text = TrialType;
+            frm.cbCarBehaviour.Text = TrialBehav;
+            frm.textBox8.Text = trialcond;
+            frm.txtContinuousCarSpeed.Text = Convert.ToString(float.Parse(trialSpeed) / float.Parse("0.277778"));
+            if (prepost.Contains("pre"))
+            {
+                frm.radioButton5.Checked = true;
+
+            }
+            else
+            {
+                frm.radioButton6.Checked = true;
+            }
+            frm.textBox2.Text = CSR1;
+            frm.textBox5.Text = CSL1;
+
+
+            SQLfx Data1 = new SQLfx();
+
+            SqlConnection con1 = Data1.openSQLConnection(); // Open SQL Connection
+
+            String[] CSR = new String[200];
+            char[] spearator = { ' ' };
+            CSR = CSR1.Split(spearator, count1, StringSplitOptions.None);
+
+            for (int i = 1; i < CSR.Length; i++)
+            {
+                Console.WriteLine("WE " + CSR[i]);
+                CSR[i] = "(" + CSR[i] + ")";
+            }
+
+            String yourString = String.Join(" , ", CSR);
+            yourString = yourString.Substring(1, yourString.Length - 1);
+            Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
+            CSR1 = yourString.Substring(1, yourString.Length - 1);
+            String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
+
+            SqlCommand cmd1 = new SqlCommand(query1, con1);
+
+            cmd1.ExecuteNonQuery();
+
+
+            SQLfx Data2 = new SQLfx();
+
+            SqlConnection con2 = Data2.openSQLConnection(); // Open SQL Connection
+
+            String[] CSL = new String[200];
+            CSL = CSL1.Split(spearator, count1, StringSplitOptions.None);
+
+            for (int i = 1; i < CSL.Length; i++)
+            {
+                Console.WriteLine("WE " + CSL[i]);
+                CSL[i] = "(" + CSL[i] + ")";
+            }
+
+            yourString = String.Join(" , ", CSL);
+            yourString = yourString.Substring(1, yourString.Length - 1);
+            CSL1 = yourString.Substring(1, yourString.Length - 1);
+            String query2 = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES " + CSL1;
+
+            SqlCommand cmd2 = new SqlCommand(query2, con2);
+            cmd2.ExecuteNonQuery();
+
+            frm.textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+            frm.textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
+
+            Console.WriteLine(CSR.GetLength(0));
+
 
         }
     }

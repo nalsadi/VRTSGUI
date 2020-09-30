@@ -284,15 +284,15 @@ namespace VRTSGUI
             String prepost = "None";
             if (radioButton5.Checked == true)
             {
-                prepost = "'pre'";
+                prepost = "pre";
             }
             else
             {
-                prepost = "'post'";
+                prepost = "post";
             }
 
             String CLSR = Data.printString("CarListSpaceRight", "CarListSpaceRight");
-            String trialcond = "'" + textBox8.Text + "'";
+            String trialcond = textBox8.Text ;
             String Speed = Convert.ToString(float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778"));
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
@@ -511,6 +511,269 @@ namespace VRTSGUI
         }
 
         private void RadioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            string index = "-1";
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    return;
+                }
+                index = Convert.ToString(row.Cells[0].Value.ToString());
+
+
+            }
+            if (index == "-1")
+            {
+                return;
+            }
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "SELECT * FROM trialPresets WHERE ID= " + index;
+
+            Console.WriteLine(query);
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            StringBuilder output = new StringBuilder();
+            int numEntries = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (DataColumn col in dt.Columns)
+                {
+                    output.AppendFormat("{0},", dr[col]);
+
+                }
+                numEntries++;
+                output.AppendLine();
+            }
+            Console.WriteLine(output);
+
+            String[] strlist1 = new String[200];
+            Int32 count1 = 200;
+            char[] spearator1 = { ',', '\0' };
+            string newoutput = output.ToString();
+            Console.WriteLine(output.ToString().Split('\n')[0]);
+            Console.WriteLine(output.ToString().Split('\n')[0].Split(',')[0]);
+            Console.WriteLine(output.ToString().Split('\n')[0].Split(',')[1]);
+            Console.WriteLine(numEntries);
+
+            strlist1 = newoutput.Split(spearator1, count1, StringSplitOptions.None);
+            String TrialType = strlist1[1];
+            String TrialBehav = strlist1[2];
+            String trialSpeed = strlist1[6];
+            String trialcond = strlist1[7];
+            String prepost = strlist1[8];
+            String CSR1 = strlist1[3];
+            String CSL1 = strlist1[4];
+
+            Console.WriteLine(TrialType + TrialBehav + trialSpeed + trialcond + prepost + CSR1 + CSL1);
+            cbTrialType.Text = TrialType;
+            cbCarBehaviour.Text = TrialBehav;
+            textBox8.Text = trialcond;
+            txtContinuousCarSpeed.Text = Convert.ToString( float.Parse(trialSpeed) / float.Parse("0.277778"));
+            if (prepost.Contains("pre"))
+            {
+                radioButton5.Checked = true;
+
+            }
+            else
+            {
+                radioButton6.Checked = true;
+            }
+            textBox2.Text = CSR1;
+            textBox5.Text = CSL1;
+
+
+            SQLfx Data1 = new SQLfx();
+
+            SqlConnection con1 = Data1.openSQLConnection(); // Open SQL Connection
+          
+            String[] CSR = new String[200];
+            char[] spearator = { ' ' };
+            CSR = CSR1.Split(spearator, count1, StringSplitOptions.None);
+
+            for(int i = 1; i < CSR.Length; i++)
+            {
+                Console.WriteLine("WE " + CSR[i]);
+                CSR[i] = "(" + CSR[i] + ")";
+            }
+
+            String yourString = String.Join(" , ", CSR);
+            yourString = yourString.Substring(1, yourString.Length - 1);
+            Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
+            CSR1 = yourString.Substring(1, yourString.Length - 1);
+            String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
+
+            SqlCommand cmd1 = new SqlCommand(query1, con1);
+
+            cmd1.ExecuteNonQuery();
+
+
+            SQLfx Data2 = new SQLfx();
+
+            SqlConnection con2 = Data2.openSQLConnection(); // Open SQL Connection
+
+            String[] CSL = new String[200];
+            CSL = CSL1.Split(spearator, count1, StringSplitOptions.None);
+
+            for (int i = 1; i < CSL.Length; i++)
+            {
+                Console.WriteLine("WE " + CSL[i]);
+                CSL[i] = "(" + CSL[i] + ")";
+            }
+
+            yourString = String.Join(" , ", CSL);
+            yourString = yourString.Substring(1, yourString.Length - 1);
+            CSL1 = yourString.Substring(1, yourString.Length - 1);
+            String query2 = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES " + CSL1;
+
+            SqlCommand cmd2 = new SqlCommand(query2, con2);
+            cmd2.ExecuteNonQuery();
+
+            textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+            textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
+
+            Console.WriteLine(CSR.GetLength(0));
+
+
+
+
+
+
+
+
+        }
+
+        private void Label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button8_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+            String farLaneSpace = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
+            String closeLaneSpace = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+
+
+            Int32 count = 210;
+            String final = "";
+            String[] strlist = new String[210];
+            String[] strlist1 = new String[210];
+            char[] spearator = { ' ' };
+
+
+            // DCP is Array 27
+            strlist = farLaneSpace.Split(spearator, count, StringSplitOptions.None);
+            strlist1 = closeLaneSpace.Split(spearator, count, StringSplitOptions.None);
+            string prev = textBox7.Text;
+            if (textBox7.Text != "None")
+            {
+                Console.WriteLine("HERE");
+
+                if (radioButton4.Checked == true)
+                {
+                    textBox7.Text = Convert.ToString(float.Parse(textBox7.Text) * (float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778")));
+                }
+                if (Math.Abs(float.Parse(strlist[1]) - float.Parse(strlist1[1])) != float.Parse(textBox7.Text))
+                {
+                    strlist[1] = (float.Parse(strlist1[1]) + float.Parse(textBox7.Text)).ToString();
+                }
+            }
+            textBox7.Text = prev;
+            //Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
+            Console.WriteLine(string.Join(" ", strlist));
+            Console.WriteLine("HJK" + strlist1.Length);
+
+            String prepost = "None";
+            if (radioButton5.Checked == true)
+            {
+                prepost = "pre";
+            }
+            else
+            {
+                prepost = "post";
+            }
+
+            String CLSR = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+            String trialcond = textBox8.Text ;
+            String Speed = Convert.ToString(float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778"));
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            Console.WriteLine("QQQQQQQ " + ID.Text);
+
+            String trialtype = "trialType = '" + cbTrialType.Text + "',";
+            String trialBehav = "trialBehav = '" + cbCarBehaviour.Text + "',";
+            String CarSpaceRight = "CarSpaceRight = '" + Data.printString("CarListSpaceRight", "CarListSpaceRight") + "',";
+            String CarSpaceLeft = "CarSpaceLeft = '" + string.Join(" ", strlist) + "',";
+            Speed = "speed = '" + Speed + "',";
+            String trialCond = "trialCond = '" + trialcond + "',";
+            prepost = "prepost = '" + prepost + "'";
+
+            String query1 = "UPDATE trialList SET " + trialtype + trialBehav + CarSpaceRight + CarSpaceLeft + Speed + trialCond + prepost + " WHERE ID=" + ID.Text;
+            Console.WriteLine(query1);
+            SqlCommand cmd = new SqlCommand(query1, con);
+            cmd.ExecuteNonQuery();
+            
+            
+
+            //cmd.CommandText = "UPDATE trialList SET trialType= " + cbTrialType.Text + " WHERE ID=" + ID.Text +";";
+            //cmd.Parameters.AddWithValue("@trialType", cbTrialType.Text);
+            //cmd.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
+            //cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
+            //cmd.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist));
+            //cmd.Parameters.AddWithValue("@speed", Speed);
+            //cmd.Parameters.AddWithValue("@trialCond", trialcond);
+            //cmd.Parameters.AddWithValue("@prepost", prepost);
+            //cmd.ExecuteNonQuery();
+
+            //frm1.updateDataTable();
+            //this.Close();
+
+            if (radioButton7.Checked == true)
+            {
+                SqlConnection con2 = Data.openSQLConnection(); // Open SQL Connection
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.Connection = con;
+                cmd2.CommandText = "INSERT INTO trialPresets (trialType, trialBehav,CarSpaceRight,CarSpaceLeft,speed,trialCond,prepost) VALUES (@trialType, @trialBehav,@CarSpaceRight,@CarSpaceLeft,@speed,@trialCond,@prepost);";
+                cmd2.Parameters.AddWithValue("@trialType", cbTrialType.Text);
+                cmd2.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
+                cmd2.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
+                cmd2.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist));
+                cmd2.Parameters.AddWithValue("@speed", Speed);
+                cmd2.Parameters.AddWithValue("@trialCond", trialcond);
+                cmd2.Parameters.AddWithValue("@prepost", prepost);
+                cmd2.ExecuteNonQuery();
+            }
+
+
+
+
+            String query = "DELETE FROM dbo.CarListSpaceRight";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            query = "DELETE FROM dbo.CarListSpaceLeft";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            // cmd.Connection = con;
+            this.Hide();
+
+            frm1.updateDataTable();
+            this.Close();
+        }
+
+        private void Label9_Click_1(object sender, EventArgs e)
         {
 
         }

@@ -159,8 +159,8 @@ namespace VRTSGUI
                 String TrialBehav = strlist1[2];
                 //Console.WriteLine("ANALYSIS"+  strlist1 +  newoutput + "\n"+strlist1[6]);
                 string trialSpeed = strlist1[6];
-                string trialcond = strlist1[7];
-                String prepost = strlist1[8];
+                string trialcond = "'" + strlist1[7] + "'";
+                String prepost = "'" + strlist1[8] + "'";
                 if (TrialBehav == "Spawn On Enter Road")
                 {
                     TrialBehav = "SPAWNONROADENTER";

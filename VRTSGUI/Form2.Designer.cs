@@ -37,6 +37,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -54,37 +57,38 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.trialPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtContinuousCarSpeed = new System.Windows.Forms.ComboBox();
             this.lblContinuousCarSpeed = new System.Windows.Forms.Label();
             this.trialTypeLabel = new System.Windows.Forms.Label();
             this.cbTrialType = new System.Windows.Forms.ComboBox();
             this.cbCarBehaviour = new System.Windows.Forms.ComboBox();
             this.carBehaviourLabel = new System.Windows.Forms.Label();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.txtContinuousCarSpeed = new System.Windows.Forms.ComboBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.button7 = new System.Windows.Forms.Button();
+            this.Editing = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.ID = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.trialPropertiesGroupBox.SuspendLayout();
-            this.Panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.SuspendLayout();
@@ -184,6 +188,40 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Car Spaces";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Location = new System.Drawing.Point(522, 69);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(102, 96);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Data Input Type";
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(11, 67);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(83, 17);
+            this.radioButton4.TabIndex = 1;
+            this.radioButton4.Text = "Temporal (s)";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(11, 33);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(74, 17);
+            this.radioButton3.TabIndex = 0;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Spatial (m)";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.RadioButton3_CheckedChanged);
             // 
             // groupBox4
             // 
@@ -370,6 +408,8 @@
             // 
             // trialPropertiesGroupBox
             // 
+            this.trialPropertiesGroupBox.Controls.Add(this.ID);
+            this.trialPropertiesGroupBox.Controls.Add(this.Editing);
             this.trialPropertiesGroupBox.Controls.Add(this.groupBox6);
             this.trialPropertiesGroupBox.Controls.Add(this.label8);
             this.trialPropertiesGroupBox.Controls.Add(this.textBox8);
@@ -385,6 +425,72 @@
             this.trialPropertiesGroupBox.TabIndex = 11;
             this.trialPropertiesGroupBox.TabStop = false;
             this.trialPropertiesGroupBox.Text = "Trial Properties";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.radioButton6);
+            this.groupBox6.Controls.Add(this.radioButton5);
+            this.groupBox6.Location = new System.Drawing.Point(350, 164);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(125, 42);
+            this.groupBox6.TabIndex = 46;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Pre/Post";
+            this.groupBox6.Enter += new System.EventHandler(this.GroupBox6_Enter);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(78, 19);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(46, 17);
+            this.radioButton6.TabIndex = 1;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Post";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(6, 19);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(41, 17);
+            this.radioButton5.TabIndex = 0;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "Pre";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(115, 129);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "Trial Condition:";
+            this.label8.Click += new System.EventHandler(this.Label8_Click);
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(200, 126);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(216, 20);
+            this.textBox8.TabIndex = 44;
+            this.textBox8.TextChanged += new System.EventHandler(this.TextBox8_TextChanged);
+            // 
+            // txtContinuousCarSpeed
+            // 
+            this.txtContinuousCarSpeed.FormattingEnabled = true;
+            this.txtContinuousCarSpeed.Items.AddRange(new object[] {
+            "30",
+            "50",
+            "70"});
+            this.txtContinuousCarSpeed.Location = new System.Drawing.Point(200, 164);
+            this.txtContinuousCarSpeed.Name = "txtContinuousCarSpeed";
+            this.txtContinuousCarSpeed.Size = new System.Drawing.Size(121, 21);
+            this.txtContinuousCarSpeed.TabIndex = 43;
+            this.txtContinuousCarSpeed.Text = "50";
+            this.txtContinuousCarSpeed.SelectedIndexChanged += new System.EventHandler(this.TxtContinuousCarSpeed_SelectedIndexChanged);
             // 
             // lblContinuousCarSpeed
             // 
@@ -453,6 +559,7 @@
             // 
             // Panel1
             // 
+            this.Panel1.Controls.Add(this.button8);
             this.Panel1.Controls.Add(this.button6);
             this.Panel1.Controls.Add(this.btnOk);
             this.Panel1.Controls.Add(this.btnCancel);
@@ -461,6 +568,18 @@
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(944, 35);
             this.Panel1.TabIndex = 12;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button6.Location = new System.Drawing.Point(623, 4);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(126, 23);
+            this.button6.TabIndex = 30;
+            this.button6.Text = "Use Selected Preset";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // btnOk
             // 
@@ -486,106 +605,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Location = new System.Drawing.Point(522, 69);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(102, 96);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Data Input Type";
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(11, 33);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(74, 17);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Spatial (m)";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.RadioButton3_CheckedChanged);
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(11, 67);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(83, 17);
-            this.radioButton4.TabIndex = 1;
-            this.radioButton4.Text = "Temporal (s)";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // txtContinuousCarSpeed
-            // 
-            this.txtContinuousCarSpeed.FormattingEnabled = true;
-            this.txtContinuousCarSpeed.Items.AddRange(new object[] {
-            "30",
-            "50",
-            "70"});
-            this.txtContinuousCarSpeed.Location = new System.Drawing.Point(200, 164);
-            this.txtContinuousCarSpeed.Name = "txtContinuousCarSpeed";
-            this.txtContinuousCarSpeed.Size = new System.Drawing.Size(121, 21);
-            this.txtContinuousCarSpeed.TabIndex = 43;
-            this.txtContinuousCarSpeed.Text = "50";
-            this.txtContinuousCarSpeed.SelectedIndexChanged += new System.EventHandler(this.TxtContinuousCarSpeed_SelectedIndexChanged);
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(200, 126);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(216, 20);
-            this.textBox8.TabIndex = 44;
-            this.textBox8.TextChanged += new System.EventHandler(this.TextBox8_TextChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(115, 129);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 13);
-            this.label8.TabIndex = 45;
-            this.label8.Text = "Trial Condition:";
-            this.label8.Click += new System.EventHandler(this.Label8_Click);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.radioButton6);
-            this.groupBox6.Controls.Add(this.radioButton5);
-            this.groupBox6.Location = new System.Drawing.Point(350, 164);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(125, 42);
-            this.groupBox6.TabIndex = 46;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Pre/Post";
-            this.groupBox6.Enter += new System.EventHandler(this.GroupBox6_Enter);
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 19);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(41, 17);
-            this.radioButton5.TabIndex = 0;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Pre";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(78, 19);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(46, 17);
-            this.radioButton6.TabIndex = 1;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Post";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -610,18 +629,6 @@
             this.button5.Text = "Remove Selected Presets";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button6.Location = new System.Drawing.Point(623, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(126, 23);
-            this.button6.TabIndex = 30;
-            this.button6.Text = "Use Selected Preset";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // radioButton7
             // 
@@ -659,11 +666,62 @@
             this.radioButton8.Text = "No";
             this.radioButton8.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(729, 329);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(137, 34);
+            this.button7.TabIndex = 32;
+            this.button7.Text = "Fill Form With Selected Preset";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
+            // 
+            // Editing
+            // 
+            this.Editing.AutoSize = true;
+            this.Editing.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Editing.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Editing.Location = new System.Drawing.Point(251, 16);
+            this.Editing.Name = "Editing";
+            this.Editing.Size = new System.Drawing.Size(109, 15);
+            this.Editing.TabIndex = 47;
+            this.Editing.Text = "Editing Selected Trial";
+            this.Editing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Editing.Visible = false;
+            this.Editing.Click += new System.EventHandler(this.Label9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button8.Location = new System.Drawing.Point(768, 4);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(73, 23);
+            this.button8.TabIndex = 31;
+            this.button8.Text = "Edit Trial";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8_Click);
+            // 
+            // ID
+            // 
+            this.ID.AutoSize = true;
+            this.ID.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ID.Location = new System.Drawing.Point(366, 16);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(20, 15);
+            this.ID.TabIndex = 48;
+            this.ID.Text = "ID";
+            this.ID.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ID.Visible = false;
+            this.ID.Click += new System.EventHandler(this.Label9_Click_1);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 557);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.dataGridView1);
@@ -679,17 +737,17 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.trialPropertiesGroupBox.ResumeLayout(false);
             this.trialPropertiesGroupBox.PerformLayout();
-            this.Panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
@@ -699,14 +757,10 @@
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label2;
@@ -715,10 +769,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.GroupBox trialPropertiesGroupBox;
         internal System.Windows.Forms.Label lblContinuousCarSpeed;
@@ -734,17 +786,27 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.ComboBox txtContinuousCarSpeed;
-        private System.Windows.Forms.TextBox textBox8;
         internal System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button5;
         internal System.Windows.Forms.Button button6;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.Button button7;
+        public System.Windows.Forms.ComboBox txtContinuousCarSpeed;
+        public System.Windows.Forms.TextBox textBox8;
+        public System.Windows.Forms.RadioButton radioButton2;
+        public System.Windows.Forms.RadioButton radioButton1;
+        public System.Windows.Forms.RadioButton radioButton6;
+        public System.Windows.Forms.RadioButton radioButton5;
+        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBox6;
+        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.Label Editing;
+        internal System.Windows.Forms.Button button8;
+        public System.Windows.Forms.Label ID;
     }
 }
