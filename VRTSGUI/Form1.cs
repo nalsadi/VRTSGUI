@@ -11,15 +11,58 @@ using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace VRTSGUI
 {
     public partial class Form1 : Form
     {
+        Boolean newbuttonclicked = false;
+        Button newButton = new Button();
+        String label;
         public Form1()
         {
             InitializeComponent();
             updateDataTable();
+            toGlobal tG = new toGlobal();
+            StringBuilder output = new StringBuilder();
+            int numEntries = 0;
+            if (!tG.checkEmptyTable("condPresets"))
+            {
+                SQLfx Data = new SQLfx();
+                SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+                SqlCommand cmd = new SqlCommand("SELECT condLabel FROM condPresets", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                
+                foreach (DataRow dr in dt.Rows)
+                {
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        output.AppendFormat("{0},", dr[col]);
+
+                    }
+                    numEntries++;
+                    output.AppendLine();
+                }
+                if (numEntries == 0)
+                {
+                    return;
+                }
+            }
+       
+
+            foreach (string s in output.Replace("\n", "").Replace("\r", "").ToString().Split(',').Distinct())
+            {
+                Console.WriteLine(s);
+                if(s.Length > 0)
+                {
+                    cbPreset.Items.Add(s);
+                }
+                
+            }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -132,7 +175,7 @@ namespace VRTSGUI
             {
                 meters = meters; //Dont do anything 
             }
-
+            meters = Math.Round(meters, 2);
             textBox5.Text = System.Convert.ToString(meters);
         }
 
@@ -170,8 +213,9 @@ namespace VRTSGUI
             {
                 meters = meters; //Dont do anything 
             }
-            meters = Math.Round(meters, 2);
-            textBox5.Text = System.Convert.ToString(meters);
+   
+            textBox5.Text = System.Convert.ToString(Math.Round(meters, 2));
+            
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -316,11 +360,30 @@ namespace VRTSGUI
 
         private void btnRemoveTrial_Click(object sender, EventArgs e)
         {
+
+            string index = "-1";
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    return;
+                }
+                index = Convert.ToString(row.Cells[0].Value.ToString());
+
+
+            }
+            if (index == "-1")
+            {
+                return;
+            }
+
+
             SQLfx Data = new SQLfx();
            
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
 
-            String query = "DELETE FROM trialList WHERE ID=(SELECT MAX(Id) FROM trialList)";
+            String query = "DELETE FROM trialList WHERE ID= " + index;
 
             //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -337,7 +400,27 @@ namespace VRTSGUI
             SQLfx Data = new SQLfx();
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
-            SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM trialList ORDER BY ID DESC", con);
+
+            string index = "-1";
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                if (row.Cells[0].Value == null)
+                {
+                    return;
+                }
+                index = Convert.ToString(row.Cells[0].Value.ToString());
+
+
+            }
+            if (index == "-1")
+            {
+                return;
+            }
+
+
+            String query = "SELECT * FROM trialList WHERE ID= " + index;
+            SqlCommand cmd = new SqlCommand(query, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -561,7 +644,14 @@ namespace VRTSGUI
             }
 
             String yourString = String.Join(" , ", CSR);
-            yourString = yourString.Substring(1, yourString.Length - 1);
+            if (yourString.Length == 0)
+            {
+                yourString = yourString; // Dont do anything
+            }
+            else
+            {
+                yourString = yourString.Substring(1, yourString.Length - 1);
+            }
             Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
             CSR1 = yourString.Substring(1, yourString.Length - 1);
             String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
@@ -597,6 +687,70 @@ namespace VRTSGUI
 
             Console.WriteLine(CSR.GetLength(0));
 
+
+        }
+
+        private void BtnAddPreset_Click(object sender, EventArgs e)
+        {
+            Form3 frm = new Form3(this);
+            
+            frm.Show();
+
+           
+
+
+
+        }
+
+        private void BtnSetPreset_Click(object sender, EventArgs e)
+        {
+            SQLfx Data1 = new SQLfx();
+            SqlConnection con1 = Data1.openSQLConnection(); // Open SQL Connection
+
+            String query1 = "DELETE FROM trialList";
+            SqlCommand cmd1 = new SqlCommand(query1, con1);
+            cmd1.ExecuteNonQuery();
+
+
+
+
+            SQLfx Data = new SQLfx();
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            String query = "insert into trialList(trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft) select trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft from condPresets where CONVERT(VARCHAR, condLabel)='" + cbPreset.Text + "';";
+
+            Console.WriteLine(query);
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            updateDataTable();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            SQLfx Data1 = new SQLfx();
+            SqlConnection con1 = Data1.openSQLConnection(); // Open SQL Connection
+            String query1 = "DELETE FROM trialList";
+            SqlCommand cmd1 = new SqlCommand(query1, con1);
+            cmd1.ExecuteNonQuery(); 
+            updateDataTable();
+        }
+
+        private void BtnRemovePreset_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+
+            String query = "DELETE FROM condPresets WHERE CONVERT(VARCHAR, condLabel)='" + cbPreset.Text + "'";
+
+            Console.WriteLine(query);
+            cbPreset.Items.Remove(cbPreset.Text);
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+           
+        }
+
+        private void BtnRenamePreset_Click(object sender, EventArgs e)
+        {
 
         }
     }

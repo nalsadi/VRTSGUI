@@ -717,29 +717,15 @@ namespace VRTSGUI
             String trialBehav = "trialBehav = '" + cbCarBehaviour.Text + "',";
             String CarSpaceRight = "CarSpaceRight = '" + Data.printString("CarListSpaceRight", "CarListSpaceRight") + "',";
             String CarSpaceLeft = "CarSpaceLeft = '" + string.Join(" ", strlist) + "',";
-            Speed = "speed = '" + Speed + "',";
+            String speed = "speed = '" + Speed + "',";
             String trialCond = "trialCond = '" + trialcond + "',";
-            prepost = "prepost = '" + prepost + "'";
+            String pre_post = "prepost = '" + prepost + "'";
 
-            String query1 = "UPDATE trialList SET " + trialtype + trialBehav + CarSpaceRight + CarSpaceLeft + Speed + trialCond + prepost + " WHERE ID=" + ID.Text;
+            String query1 = "UPDATE trialList SET " + trialtype + trialBehav + CarSpaceRight + CarSpaceLeft + speed + trialCond + pre_post + " WHERE ID=" + ID.Text;
             Console.WriteLine(query1);
             SqlCommand cmd = new SqlCommand(query1, con);
             cmd.ExecuteNonQuery();
-            
-            
 
-            //cmd.CommandText = "UPDATE trialList SET trialType= " + cbTrialType.Text + " WHERE ID=" + ID.Text +";";
-            //cmd.Parameters.AddWithValue("@trialType", cbTrialType.Text);
-            //cmd.Parameters.AddWithValue("@trialBehav", cbCarBehaviour.Text);
-            //cmd.Parameters.AddWithValue("@CarSpaceRight", Data.printString("CarListSpaceRight", "CarListSpaceRight"));
-            //cmd.Parameters.AddWithValue("@CarSpaceLeft", string.Join(" ", strlist));
-            //cmd.Parameters.AddWithValue("@speed", Speed);
-            //cmd.Parameters.AddWithValue("@trialCond", trialcond);
-            //cmd.Parameters.AddWithValue("@prepost", prepost);
-            //cmd.ExecuteNonQuery();
-
-            //frm1.updateDataTable();
-            //this.Close();
 
             if (radioButton7.Checked == true)
             {
@@ -766,7 +752,7 @@ namespace VRTSGUI
             query = "DELETE FROM dbo.CarListSpaceLeft";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
-            // cmd.Connection = con;
+
             this.Hide();
 
             frm1.updateDataTable();

@@ -15,8 +15,35 @@ namespace VRTSGUI
 {
     public class toGlobal
     {
+        public bool checkEmptyTable(String table)
+        {
+
+            SQLfx Data = new SQLfx();
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            String query = "SELECT COUNT(*) from " + table;
+            SqlCommand cmd = new SqlCommand(query, con);
+                //cmd.ExecuteNonQuery();
+
+
+            int result = int.Parse(cmd.ExecuteScalar().ToString());
+
+            return result == 0; // if result equals zero, then the table is empty
+
+        }
         public void ee(String PartID, String PartAge, String PartSex, String PartHeight)
         {
+
+            Console.WriteLine(checkEmptyTable("trialList"));
+            if(checkEmptyTable("trialList") && !checkEmptyTable("condPresets")) // Also check if preset selected
+            {
+                SQLfx DataQ = new SQLfx();
+                SqlConnection conQ = DataQ.openSQLConnection(); // Open SQL Connection
+                String queryQ = "insert into trialList(condLabel, trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft) select condLabel ,trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft from condPresets";
+
+                SqlCommand cmdQ = new SqlCommand(queryQ, conQ);
+                cmdQ.ExecuteNonQuery();
+                Console.WriteLine(queryQ);
+            }
             Form1 mainForm = new Form1();
             SQLfx Data = new SQLfx();
 

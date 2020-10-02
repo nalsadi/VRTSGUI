@@ -99,6 +99,7 @@
             this.btnCopyTrial = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbProgramConfiguration.SuspendLayout();
@@ -699,30 +700,33 @@
             // 
             // btnSetPreset
             // 
-            this.btnSetPreset.Location = new System.Drawing.Point(180, 49);
+            this.btnSetPreset.Location = new System.Drawing.Point(59, 49);
             this.btnSetPreset.Name = "btnSetPreset";
             this.btnSetPreset.Size = new System.Drawing.Size(47, 23);
             this.btnSetPreset.TabIndex = 4;
-            this.btnSetPreset.Text = "Set";
+            this.btnSetPreset.Text = "Load";
             this.btnSetPreset.UseVisualStyleBackColor = true;
+            this.btnSetPreset.Click += new System.EventHandler(this.BtnSetPreset_Click);
             // 
             // btnRenamePreset
             // 
-            this.btnRenamePreset.Location = new System.Drawing.Point(121, 49);
+            this.btnRenamePreset.Location = new System.Drawing.Point(112, 49);
             this.btnRenamePreset.Name = "btnRenamePreset";
             this.btnRenamePreset.Size = new System.Drawing.Size(55, 23);
             this.btnRenamePreset.TabIndex = 3;
             this.btnRenamePreset.Text = "Rename";
             this.btnRenamePreset.UseVisualStyleBackColor = true;
+            this.btnRenamePreset.Click += new System.EventHandler(this.BtnRenamePreset_Click);
             // 
             // btnRemovePreset
             // 
-            this.btnRemovePreset.Location = new System.Drawing.Point(57, 49);
+            this.btnRemovePreset.Location = new System.Drawing.Point(173, 50);
             this.btnRemovePreset.Name = "btnRemovePreset";
             this.btnRemovePreset.Size = new System.Drawing.Size(60, 23);
             this.btnRemovePreset.TabIndex = 2;
             this.btnRemovePreset.Text = "Remove";
             this.btnRemovePreset.UseVisualStyleBackColor = true;
+            this.btnRemovePreset.Click += new System.EventHandler(this.BtnRemovePreset_Click);
             // 
             // btnAddPreset
             // 
@@ -732,6 +736,7 @@
             this.btnAddPreset.TabIndex = 1;
             this.btnAddPreset.Text = "Add...";
             this.btnAddPreset.UseVisualStyleBackColor = true;
+            this.btnAddPreset.Click += new System.EventHandler(this.BtnAddPreset_Click);
             // 
             // conditionLabel
             // 
@@ -823,11 +828,25 @@
             this.dataGridView1.TabIndex = 26;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(441, 535);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "Clear All ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1116, 616);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnCopyTrial);
@@ -843,7 +862,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "VRTS GUI";
+            this.Text = "VR3.0 GUI";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -936,6 +955,7 @@
         internal System.Windows.Forms.Label label15;
         internal System.Windows.Forms.TextBox iST;
         internal System.Windows.Forms.Label label18;
+        internal System.Windows.Forms.Button button2;
     }
 }
 

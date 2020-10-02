@@ -317,12 +317,12 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(545, 43);
+            this.label7.Location = new System.Drawing.Point(525, 44);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.Size = new System.Drawing.Size(76, 13);
             this.label7.TabIndex = 8;
-            this.label7.Text = "Offset";
+            this.label7.Text = "First Car Offset";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label4
