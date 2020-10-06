@@ -57,6 +57,8 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.trialPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.ID = new System.Windows.Forms.Label();
+            this.Editing = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
@@ -69,6 +71,7 @@
             this.cbCarBehaviour = new System.Windows.Forms.ComboBox();
             this.carBehaviourLabel = new System.Windows.Forms.Label();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -78,9 +81,6 @@
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.button7 = new System.Windows.Forms.Button();
-            this.Editing = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
-            this.ID = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -313,6 +313,7 @@
             this.textBox7.Text = "None";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox7_KeyPress);
             // 
             // label7
             // 
@@ -426,6 +427,34 @@
             this.trialPropertiesGroupBox.TabStop = false;
             this.trialPropertiesGroupBox.Text = "Trial Properties";
             // 
+            // ID
+            // 
+            this.ID.AutoSize = true;
+            this.ID.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ID.Location = new System.Drawing.Point(366, 16);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(20, 15);
+            this.ID.TabIndex = 48;
+            this.ID.Text = "ID";
+            this.ID.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ID.Visible = false;
+            this.ID.Click += new System.EventHandler(this.Label9_Click_1);
+            // 
+            // Editing
+            // 
+            this.Editing.AutoSize = true;
+            this.Editing.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Editing.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Editing.Location = new System.Drawing.Point(251, 16);
+            this.Editing.Name = "Editing";
+            this.Editing.Size = new System.Drawing.Size(109, 15);
+            this.Editing.TabIndex = 47;
+            this.Editing.Text = "Editing Selected Trial";
+            this.Editing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Editing.Visible = false;
+            this.Editing.Click += new System.EventHandler(this.Label9_Click);
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.radioButton6);
@@ -517,18 +546,7 @@
             "EVASIVE",
             "PILOT",
             "PRACTICE",
-            "SpeedTest_Running",
-            "SpeedTest_Walking",
-            "TimePresOn_PRE",
-            "TimePresOn_POST",
-            "STANDARD_ConstantGap_PRE",
-            "STANDARD_ConstantGap_POST",
-            "STANDARD_Familiarity_PRE",
-            "STANDARD_Familiarity_POST",
-            "STANDARD_VariableGap_PRE",
-            "STANDARD_VariableGap_POST",
-            "STANDARD_IncrementalGap_PRE",
-            "STANDARD_IncrementalGap_POST"});
+            "STANDARD_ConstantGap_PRE"});
             this.cbTrialType.Location = new System.Drawing.Point(200, 53);
             this.cbTrialType.Name = "cbTrialType";
             this.cbTrialType.Size = new System.Drawing.Size(216, 21);
@@ -568,6 +586,18 @@
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(944, 35);
             this.Panel1.TabIndex = 12;
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button8.Location = new System.Drawing.Point(768, 4);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(73, 23);
+            this.button8.TabIndex = 31;
+            this.button8.Text = "Edit Trial";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // button6
             // 
@@ -626,7 +656,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(137, 34);
             this.button5.TabIndex = 28;
-            this.button5.Text = "Remove Selected Presets";
+            this.button5.Text = "Remove Selected Preset";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
@@ -675,46 +705,6 @@
             this.button7.Text = "Fill Form With Selected Preset";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.Button7_Click);
-            // 
-            // Editing
-            // 
-            this.Editing.AutoSize = true;
-            this.Editing.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Editing.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Editing.Location = new System.Drawing.Point(251, 16);
-            this.Editing.Name = "Editing";
-            this.Editing.Size = new System.Drawing.Size(109, 15);
-            this.Editing.TabIndex = 47;
-            this.Editing.Text = "Editing Selected Trial";
-            this.Editing.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Editing.Visible = false;
-            this.Editing.Click += new System.EventHandler(this.Label9_Click);
-            // 
-            // button8
-            // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button8.Location = new System.Drawing.Point(768, 4);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(73, 23);
-            this.button8.TabIndex = 31;
-            this.button8.Text = "Edit Trial";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Button8_Click);
-            // 
-            // ID
-            // 
-            this.ID.AutoSize = true;
-            this.ID.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ID.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.ID.Location = new System.Drawing.Point(366, 16);
-            this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(20, 15);
-            this.ID.TabIndex = 48;
-            this.ID.Text = "ID";
-            this.ID.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ID.Visible = false;
-            this.ID.Click += new System.EventHandler(this.Label9_Click_1);
             // 
             // Form2
             // 

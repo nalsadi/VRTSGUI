@@ -30,7 +30,7 @@ namespace VRTSGUI
             return result == 0; // if result equals zero, then the table is empty
 
         }
-        public void ee(String PartID, String PartAge, String PartSex, String PartHeight)
+        public void ee(String PartID, String PartAge, String PartSex, String PartHeight, String folderPath, String fileExt)
         {
 
             Console.WriteLine(checkEmptyTable("trialList"));
@@ -116,9 +116,18 @@ namespace VRTSGUI
             strlist = array[33].Split(spearator, count, StringSplitOptions.None);
             array[33] = strlist[0] + " = " + RND;
 
+            // folderPath is Array 35
+            strlist = array[34].Split(spearator, count, StringSplitOptions.None);
+            array[34] = strlist[0] + " = '" + folderPath + "'";
+
+            // folderPath is Array 36
+            strlist = array[35].Split(spearator, count, StringSplitOptions.None);
+            array[35] = strlist[0] + " = '" + fileExt + "'";
+
             // ID is Array 41
             strlist = array[40].Split(spearator, count, StringSplitOptions.None);
             array[40] = strlist[0] + " = " + "'" + PartID + "'" ;
+
             // participantVariableValues is Array 43
             array[42] = "participantVariableValues = "+ "["+ "'" + PartID + "'" +","+ "'" + PartAge + "'" + "," + "'" + PartSex + "'" + "," + "'" + PartHeight + "'" + "]"; 
 
@@ -223,8 +232,7 @@ namespace VRTSGUI
                     }
                 }
 
-                //Console.WriteLine("\n\n" + finalCSR + "\n\n\n");
-                //Console.WriteLine(string.Format("TrialType." + TrialType + ", " + "None" + ", " + "CarBehaviour." + TrialBehav + ", " + "[" + finalCSR + "]" + ", " + "[" + finalCSL + "]" + "\n"));
+
                 TrialType = TrialType.Replace("-", "_");
                 TrialType = TrialType.ToUpper();
                 if (TrialType == "STANDARD_CONSTANTGAP_PRE")
@@ -254,16 +262,10 @@ namespace VRTSGUI
                     Console.WriteLine(newArray[i]);
                 }
             }
-            //strlist1 = output.ToString().Split('\n');
-            //Console.WriteLine(strlist1[0]);
-            //Console.WriteLine(strlist1[1]);
-            //Console.WriteLine(output[1]);
-            //  Now run the python scipt to start main simulation
+
 
             Console.WriteLine("Printing to global completed");
 
-
-            //  Clean out database when all values have been put into file
 
 
         }

@@ -271,20 +271,22 @@ namespace VRTSGUI
             cmd.Parameters.AddWithValue("@MPA", txtMaxPitchAngle.Text);
             cmd.Parameters.AddWithValue("@IST", iST.Text);
             cmd.ExecuteNonQuery();
-            //Data.closeSQLConnection(con);
-            //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
-            //textBox1.Text = "";
+
             toGlobal fileStuff = new toGlobal();
             if(txtID.Text.Length == 0)
             {
                 txtID.Text = "ID";
             }
-            fileStuff.ee(txtID.Text, txtAge.Text, Sex.Text, txtHeight.Text);
+            fileStuff.ee(txtID.Text, txtAge.Text, Sex.Text, txtHeight.Text, txtPath.Text,textBox7.Text);
             cmd.ExecuteNonQuery();
             String query = "DELETE FROM dbo.properties";
             cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
+
             Process.Start(@"C:\vr\vr3\main.py");
+
+            txtID.Text = "";
+
 
         }
 
@@ -346,6 +348,17 @@ namespace VRTSGUI
             dataGridView1.Columns[0].Visible = false;
 
             dataGridView1.ReadOnly = true;
+           
+            int index;
+            if (dataGridView1.Rows.Count > 1)
+            {
+                index = dataGridView1.Rows.Count - 2;
+            }
+            else
+            {
+                index = 0;
+            }
+            dataGridView1.Rows[index].Selected = true;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -384,19 +397,15 @@ namespace VRTSGUI
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
 
             String query = "DELETE FROM trialList WHERE ID= " + index;
-
-            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
             SqlCommand cmd = new SqlCommand(query, con);
-            //cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
             cmd.ExecuteNonQuery();
             updateDataTable();
-            //Data.closeSQLConnection(con);
-            //textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
+           
         }
 
         private void btnCopyTrial_Click(object sender, EventArgs e)
         {
-           // Needs defensive programming -- What if no entires in DataTable??
+           // Needs defensive programming -- What if no entires in DataTable?? Should be working now 
             SQLfx Data = new SQLfx();
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
@@ -673,19 +682,31 @@ namespace VRTSGUI
                 Console.WriteLine("WE " + CSL[i]);
                 CSL[i] = "(" + CSL[i] + ")";
             }
-
             yourString = String.Join(" , ", CSL);
-            yourString = yourString.Substring(1, yourString.Length - 1);
-            CSL1 = yourString.Substring(1, yourString.Length - 1);
-            String query2 = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES " + CSL1;
+            if (yourString.Length > 0)
+            {
+                
+                yourString = yourString.Substring(1, yourString.Length - 1);
+                CSL1 = yourString.Substring(1, yourString.Length - 1);
+                String query2 = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES " + CSL1;
 
-            SqlCommand cmd2 = new SqlCommand(query2, con2);
-            cmd2.ExecuteNonQuery();
+                SqlCommand cmd2 = new SqlCommand(query2, con2);
+                cmd2.ExecuteNonQuery();
+            }
 
             frm.textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             frm.textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
 
             Console.WriteLine(CSR.GetLength(0));
+
+            if (CSL.Length - 1 > 0)
+            {
+                frm.radioButton2.Checked = true;
+            }
+            else
+            {
+                frm.radioButton1.Checked = true;
+            }
 
 
         }
@@ -695,6 +716,7 @@ namespace VRTSGUI
             Form3 frm = new Form3(this);
             
             frm.Show();
+            frm.button2.Visible = false;
 
            
 
@@ -746,10 +768,36 @@ namespace VRTSGUI
             cbPreset.Items.Remove(cbPreset.Text);
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.ExecuteNonQuery();
-           
+            button2.PerformClick();
         }
 
         private void BtnRenamePreset_Click(object sender, EventArgs e)
+        {
+            Form3 frm = new Form3(this);
+
+            frm.Show();
+            frm.button1.Visible = false;
+
+
+        }
+
+        private void BtnBrowsePath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fdlg  = new FolderBrowserDialog();
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                txtPath.Text = fdlg.SelectedPath + @"\";
+                txtPath.Text = txtPath.Text.Replace(@"\", @"\\");
+                
+            }
+        }
+
+        private void TxtPath_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label8_Click(object sender, EventArgs e)
         {
 
         }

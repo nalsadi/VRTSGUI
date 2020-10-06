@@ -367,6 +367,14 @@ namespace VRTSGUI
         {
 
         }
+        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+        (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
 
         private void RadioButton3_CheckedChanged(object sender, EventArgs e)
         {
@@ -533,6 +541,21 @@ namespace VRTSGUI
             {
                 return;
             }
+
+
+            cbTrialType.SelectedIndex = 0;
+            cbCarBehaviour.Text = "";
+            textBox8.Text = "";
+            SQLfx DataC = new SQLfx();
+            SqlConnection conC = DataC.openSQLConnection(); // Open SQL Connection
+
+            String queryC = "DELETE FROM CarListSpaceRight; DELETE FROM CarListSpaceLeft";
+
+            SqlCommand cmdC = new SqlCommand(queryC, conC);
+
+            cmdC.ExecuteNonQuery();
+
+
             SQLfx Data = new SQLfx();
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
@@ -633,18 +656,28 @@ namespace VRTSGUI
             }
 
             yourString = String.Join(" , ", CSL);
-            yourString = yourString.Substring(1, yourString.Length - 1);
-            CSL1 = yourString.Substring(1, yourString.Length - 1);
-            String query2 = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES " + CSL1;
+            if (yourString.Length > 0)
+            {
+                yourString = yourString.Substring(1, yourString.Length - 1);
+                CSL1 = yourString.Substring(1, yourString.Length - 1);
+                String query2 = "INSERT INTO dbo.CarListSpaceLeft (CarListSpaceLeft) VALUES " + CSL1;
 
-            SqlCommand cmd2 = new SqlCommand(query2, con2);
-            cmd2.ExecuteNonQuery();
-
+                SqlCommand cmd2 = new SqlCommand(query2, con2);
+                cmd2.ExecuteNonQuery();
+            }
             textBox2.Text = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
 
             Console.WriteLine(CSR.GetLength(0));
-
+            Console.WriteLine("RWRTWTW " + CSL.GetLength(0));
+            if (CSL.Length -1  > 0)
+            {
+                radioButton2.Checked = true;
+            }
+            else
+            {
+                radioButton1.Checked = true;
+            }
 
 
 

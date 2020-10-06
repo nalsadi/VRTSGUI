@@ -275,6 +275,7 @@
             this.label8.Size = new System.Drawing.Size(58, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Height (m):";
+            this.label8.Click += new System.EventHandler(this.Label8_Click);
             // 
             // textBox4
             // 
@@ -415,6 +416,7 @@
             this.btnBrowsePath.TabIndex = 10;
             this.btnBrowsePath.Text = "Browse...";
             this.btnBrowsePath.UseVisualStyleBackColor = true;
+            this.btnBrowsePath.Click += new System.EventHandler(this.BtnBrowsePath_Click);
             // 
             // txtPath
             // 
@@ -422,6 +424,8 @@
             this.txtPath.Name = "txtPath";
             this.txtPath.Size = new System.Drawing.Size(182, 20);
             this.txtPath.TabIndex = 9;
+            this.txtPath.Text = "C:\\\\vr\\\\vr3\\\\_testing_data\\\\";
+            this.txtPath.TextChanged += new System.EventHandler(this.TxtPath_TextChanged);
             // 
             // lblVrPath
             // 
@@ -714,7 +718,7 @@
             this.btnRenamePreset.Name = "btnRenamePreset";
             this.btnRenamePreset.Size = new System.Drawing.Size(55, 23);
             this.btnRenamePreset.TabIndex = 3;
-            this.btnRenamePreset.Text = "Rename";
+            this.btnRenamePreset.Text = "Edit";
             this.btnRenamePreset.UseVisualStyleBackColor = true;
             this.btnRenamePreset.Click += new System.EventHandler(this.BtnRenamePreset_Click);
             // 
@@ -805,7 +809,7 @@
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStart.Location = new System.Drawing.Point(794, 532);
+            this.btnStart.Location = new System.Drawing.Point(824, 526);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 32);
             this.btnStart.TabIndex = 24;
@@ -818,7 +822,7 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 144);
+            this.dataGridView1.Location = new System.Drawing.Point(8, 134);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -909,7 +913,6 @@
         internal System.Windows.Forms.Label lblExtension;
         internal System.Windows.Forms.TextBox textBox7;
         internal System.Windows.Forms.Button btnBrowsePath;
-        internal System.Windows.Forms.TextBox txtPath;
         internal System.Windows.Forms.Label lblVrPath;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label10;
@@ -956,6 +959,7 @@
         internal System.Windows.Forms.TextBox iST;
         internal System.Windows.Forms.Label label18;
         internal System.Windows.Forms.Button button2;
+        public System.Windows.Forms.TextBox txtPath;
     }
 }
 
