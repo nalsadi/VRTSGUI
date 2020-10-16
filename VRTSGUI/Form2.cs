@@ -74,10 +74,12 @@ namespace VRTSGUI
             if(radioButton4.Checked == true && textBox1.TextLength != 0)
             {
                 float value = float.Parse(textBox1.Text) * (float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778")) ;
-                textBox1.Text = Convert.ToString(value);
+                textBox1.Text = value.ToString("0.00"); //Convert.ToString(value);
             }
 
             SqlCommand cmd = new SqlCommand(query, con);
+            textBox1.Text = float.Parse(textBox1.Text).ToString("0.00");
+            Console.WriteLine("YUYU" + float.Parse(textBox1.Text).ToString("0.00"));
             cmd.Parameters.AddWithValue("@CarListSpaceRight", textBox1.Text);
             textBox1.Text = prev;
             cmd.ExecuteNonQuery();
@@ -221,7 +223,7 @@ namespace VRTSGUI
             if (radioButton4.Checked == true && textBox6.TextLength != 0)
             {
                 float value = float.Parse(textBox6.Text) * (float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778") );
-                textBox6.Text = Convert.ToString(value);
+                textBox6.Text = value.ToString("0.00");
             }
 
             cmd.Parameters.AddWithValue("@CarListSpaceLeft", textBox6.Text);
@@ -239,11 +241,11 @@ namespace VRTSGUI
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
 
             String query = "DELETE FROM CarListSpaceLeft WHERE ID=(SELECT MAX(Id) FROM CarListSpaceLeft)";
-            //WIPE TABLE ---- String query = "DELETE FROM dbo.CarListSpaceDIRECTION";
+            
             SqlCommand cmd = new SqlCommand(query, con);
-            //cmd.Parameters.AddWithValue("@CarListSpaceLeft", textBox1.Text);
+          
             cmd.ExecuteNonQuery();
-            //Data.closeSQLConnection(con);
+           
             textBox5.Text = Data.printString("CarListSpaceLeft", "CarListSpaceLeft");
             textBox6.Text = "";
         }
@@ -277,9 +279,6 @@ namespace VRTSGUI
                 }
             }
             textBox7.Text = prev;
-            //Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
-            Console.WriteLine(string.Join(" ", strlist));
-            Console.WriteLine("HJK" + strlist1.Length);
 
             String prepost = "None";
             if (radioButton5.Checked == true)
@@ -293,7 +292,8 @@ namespace VRTSGUI
 
             String CLSR = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             String trialcond = textBox8.Text ;
-            String Speed = Convert.ToString(float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778"));
+            float temp = float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778");
+            String Speed = temp.ToString("0.00");
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
@@ -307,8 +307,6 @@ namespace VRTSGUI
             cmd.Parameters.AddWithValue("@prepost", prepost);
             cmd.ExecuteNonQuery();
 
-            //frm1.updateDataTable();
-            //this.Close();
 
             if (radioButton7.Checked == true)
             {
@@ -502,7 +500,6 @@ namespace VRTSGUI
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             Console.WriteLine(index);
-            //String query = "INSERT INTO trialList " + "SELECT * FROM trialPresets" + " WHERE ID=" + index;
             String query = "insert into trialList(trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft) select trialType,prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft from trialPresets where ID=" + index + ";";
             Console.WriteLine(query);
 
@@ -724,9 +721,7 @@ namespace VRTSGUI
                 }
             }
             textBox7.Text = prev;
-            //Console.WriteLine("Hello " + int.Parse(strlist[1]) + int.Parse(strlist1[1]) + "Between");
-            Console.WriteLine(string.Join(" ", strlist));
-            Console.WriteLine("HJK" + strlist1.Length);
+            
 
             String prepost = "None";
             if (radioButton5.Checked == true)
@@ -743,8 +738,6 @@ namespace VRTSGUI
             String Speed = Convert.ToString(float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778"));
 
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
-
-            Console.WriteLine("QQQQQQQ " + ID.Text);
 
             String trialtype = "trialType = '" + cbTrialType.Text + "',";
             String trialBehav = "trialBehav = '" + cbCarBehaviour.Text + "',";

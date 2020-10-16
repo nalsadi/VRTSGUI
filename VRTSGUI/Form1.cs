@@ -661,13 +661,16 @@ namespace VRTSGUI
             {
                 yourString = yourString.Substring(1, yourString.Length - 1);
             }
-            Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
-            CSR1 = yourString.Substring(1, yourString.Length - 1);
-            String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
+            //Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
+            if (yourString.Length > 0)
+            {
+                CSR1 = yourString.Substring(1, yourString.Length - 1);
+                String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
 
-            SqlCommand cmd1 = new SqlCommand(query1, con1);
+                SqlCommand cmd1 = new SqlCommand(query1, con1);
 
-            cmd1.ExecuteNonQuery();
+                cmd1.ExecuteNonQuery();
+            }
 
 
             SQLfx Data2 = new SQLfx();
