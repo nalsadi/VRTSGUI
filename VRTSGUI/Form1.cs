@@ -804,5 +804,27 @@ namespace VRTSGUI
         {
 
         }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            SQLfx Data = new SQLfx();
+            SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
+            String query = "insert into temptrialList(condLabel, trialType, prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft) select condLabel, trialType, prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft from trialList order by NEWID()";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+
+            button2.PerformClick();
+
+            query = "insert into trialList(condLabel, trialType, prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft) select condLabel, trialType, prepost, trialCond, trialBehav, speed, CarSpaceRight, CarSpaceLeft from temptrialList order by NEWID()";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            updateDataTable();
+
+            query = "DELETE FROM temptrialList";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+
+        }
     }
 }
