@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace VRTSGUI #This
+namespace VRTSGUI 
 {
     public partial class Form1 : Form
     {
@@ -285,7 +285,7 @@ namespace VRTSGUI #This
 
             Process.Start(@"C:\vr\vr3\main.py");
 
-            txtID.Text = "";
+            //txtID.Text = "";
 
 
         }
@@ -624,10 +624,20 @@ namespace VRTSGUI #This
             frm.cbTrialType.Text = TrialType;
             frm.cbCarBehaviour.Text = TrialBehav;
             frm.textBox8.Text = trialcond;
-            frm.txtContinuousCarSpeed.Text = Convert.ToString(float.Parse(trialSpeed) / float.Parse("0.277778"));
+            float temp = float.Parse(trialSpeed) / float.Parse("0.277778");
+            // Console.WriteLine(txtContinuousCarSpeed.Text);
+            int inter = (int)Math.Round(temp);
+            frm.txtContinuousCarSpeed.Text = Convert.ToString(inter);
+
+
             if (prepost.Contains("pre"))
             {
                 frm.radioButton5.Checked = true;
+
+            }
+            else if (prepost.Contains("stand"))
+            {
+                frm.radioButton9.Checked = true;
 
             }
             else

@@ -376,7 +376,7 @@
             this.iST.Name = "iST";
             this.iST.Size = new System.Drawing.Size(37, 20);
             this.iST.TabIndex = 21;
-            this.iST.Text = "6.21";
+            this.iST.Text = "2.0";
             // 
             // gbOptions
             // 

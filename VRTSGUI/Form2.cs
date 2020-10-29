@@ -285,6 +285,10 @@ namespace VRTSGUI
             {
                 prepost = "pre";
             }
+            else if(radioButton9.Checked == true)
+            {
+                prepost = "stand";
+            }
             else
             {
                 prepost = "post";
@@ -293,6 +297,7 @@ namespace VRTSGUI
             String CLSR = Data.printString("CarListSpaceRight", "CarListSpaceRight");
             String trialcond = textBox8.Text ;
             float temp = float.Parse(txtContinuousCarSpeed.Text) * float.Parse("0.277778");
+            ///int inter = (int)Math.Routemp);
             String Speed = temp.ToString("0.00");
             SqlConnection con = Data.openSQLConnection(); // Open SQL Connection
             SqlCommand cmd = new SqlCommand();
@@ -600,10 +605,18 @@ namespace VRTSGUI
             cbTrialType.Text = TrialType;
             cbCarBehaviour.Text = TrialBehav;
             textBox8.Text = trialcond;
-            txtContinuousCarSpeed.Text = Convert.ToString( float.Parse(trialSpeed) / float.Parse("0.277778"));
+            float temp = float.Parse(trialSpeed) / float.Parse("0.277778");
+            Console.WriteLine(txtContinuousCarSpeed.Text);
+            int inter = (int)Math.Round(temp);
+            txtContinuousCarSpeed.Text = Convert.ToString(inter);
             if (prepost.Contains("pre"))
             {
                 radioButton5.Checked = true;
+
+            }
+            else if (prepost.Contains("stand"))
+            {
+                radioButton9.Checked = true;
 
             }
             else
@@ -629,16 +642,18 @@ namespace VRTSGUI
             }
 
             String yourString = String.Join(" , ", CSR);
-            yourString = yourString.Substring(1, yourString.Length - 1);
-            Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
-            CSR1 = yourString.Substring(1, yourString.Length - 1);
-            String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
+            if (yourString.Length > 0)
+            {
+                yourString = yourString.Substring(1, yourString.Length - 1);
+                Console.WriteLine("OKAY " + yourString.Substring(1, yourString.Length - 1));
+                CSR1 = yourString.Substring(1, yourString.Length - 1);
+                String query1 = "INSERT INTO dbo.CarListSpaceRight (CarListSpaceRight) VALUES " + CSR1;
 
-            SqlCommand cmd1 = new SqlCommand(query1, con1);
+                SqlCommand cmd1 = new SqlCommand(query1, con1);
 
-            cmd1.ExecuteNonQuery();
+                cmd1.ExecuteNonQuery();
 
-
+            }
             SQLfx Data2 = new SQLfx();
 
             SqlConnection con2 = Data2.openSQLConnection(); // Open SQL Connection
@@ -728,6 +743,10 @@ namespace VRTSGUI
             {
                 prepost = "pre";
             }
+            else if(radioButton9.Checked ==  true)
+            {
+                prepost = "stand";
+            }
             else
             {
                 prepost = "post";
@@ -786,6 +805,11 @@ namespace VRTSGUI
         }
 
         private void Label9_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RadioButton9_CheckedChanged(object sender, EventArgs e)
         {
 
         }
