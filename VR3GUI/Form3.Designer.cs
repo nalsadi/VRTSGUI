@@ -1,4 +1,4 @@
-﻿namespace VRTSGUI
+﻿namespace VR3GUI
 {
     partial class Form3
     {

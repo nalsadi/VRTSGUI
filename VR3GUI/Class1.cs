@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VRTSGUI
+namespace VR3GUI
 {
     class Class1
     {

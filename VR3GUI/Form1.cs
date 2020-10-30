@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace VRTSGUI 
+namespace VR3GUI 
 {
     public partial class Form1 : Form
     {

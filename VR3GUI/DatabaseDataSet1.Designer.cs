@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace VRTSGUI {
+namespace VR3GUI {
     
     
     /// <summary>
@@ -3274,7 +3274,7 @@ namespace VRTSGUI {
         }
     }
 }
-namespace VRTSGUI.DatabaseDataSet1TableAdapters {
+namespace VR3GUI.DatabaseDataSet1TableAdapters {
     
     
     /// <summary>
@@ -3433,7 +3433,7 @@ SELECT Id, CarListSpaceLeft FROM CarListSpaceLeft WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VRTSGUI.Properties.Settings.Default.DatabaseConnectionString;
+            this._connection.ConnectionString = global::VR3GUI.Properties.Settings.Default.DatabaseConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3758,7 +3758,7 @@ SELECT Id, CarListSpaceRight FROM CarListSpaceRight WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VRTSGUI.Properties.Settings.Default.DatabaseConnectionString;
+            this._connection.ConnectionString = global::VR3GUI.Properties.Settings.Default.DatabaseConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4123,7 +4123,7 @@ SELECT Id, DCP, NMD, RSD, RND, FCA, PCA, MPA FROM properties WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VRTSGUI.Properties.Settings.Default.DatabaseConnectionString;
+            this._connection.ConnectionString = global::VR3GUI.Properties.Settings.Default.DatabaseConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4657,7 +4657,7 @@ SELECT Id, trialType, trialBehav, CarSpaceRight, CarSpaceLeft, numDirections FRO
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VRTSGUI.Properties.Settings.Default.DatabaseConnectionString;
+            this._connection.ConnectionString = global::VR3GUI.Properties.Settings.Default.DatabaseConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5112,7 +5112,7 @@ SELECT Id, trialType, trialBehav, CarSpaceRight, CarSpaceLeft, numDirections FRO
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VRTSGUI.Properties.Settings.Default.DatabaseConnectionString;
+            this._connection.ConnectionString = global::VR3GUI.Properties.Settings.Default.DatabaseConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5526,7 +5526,7 @@ SELECT Id, trialType, trialBehav FROM trialProperties WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::VRTSGUI.Properties.Settings.Default.DatabaseConnectionString;
+            this._connection.ConnectionString = global::VR3GUI.Properties.Settings.Default.DatabaseConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

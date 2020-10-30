@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
-namespace VRTSGUI
+namespace VR3GUI
 { 
 
     public partial class Form2 : Form

@@ -1,4 +1,4 @@
-﻿namespace VRTSGUI
+﻿namespace VR3GUI
 {
     partial class Form1
     {
@@ -94,7 +94,7 @@
             this.btnEditTrial = new System.Windows.Forms.Button();
             this.btnRemoveTrial = new System.Windows.Forms.Button();
             this.btnAddTrial = new System.Windows.Forms.Button();
-            this.databaseDataSet = new VRTSGUI.DatabaseDataSet();
+            this.databaseDataSet = new VR3GUI.DatabaseDataSet();
             this.databaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnCopyTrial = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();

@@ -1,4 +1,4 @@
-﻿namespace VRTSGUI
+﻿namespace VR3GUI
 {
 
 
@@ -15,13 +15,14 @@
     }
 }
 
-namespace VRTSGUI.DatabaseDataSet1TableAdapters
+namespace VR3GUI.DatabaseDataSet1TableAdapters
 {
     partial class trialListTableAdapter
     {
-        
+
     }
 
-    public partial class propertiesTableAdapter {
+    public partial class propertiesTableAdapter
+    {
     }
 }

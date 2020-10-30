@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
 
-namespace VRTSGUI
+namespace VR3GUI
 {
     static class Program
     {
